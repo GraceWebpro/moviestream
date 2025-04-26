@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+:root {
+  --primary-color: #FF5722;
+  --background-color: #0d0d0d;
+  --text-color: #ffffff;
+  --accent-color: #FFC107;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.navbar.dark {
+  background-color: #121212;
+}
+
+.navbar.light {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.primary-btn {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+}
+
+.footer {
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+  background: #121212;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.movie-card {
+  background: #1c1c1c;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.movie-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.home-page h2 {
+  text-align: center;
+  margin-top: 20px;
+}
+
+
+
+/* Hero section */
+/* Hero Section */
+/* Hero Section */
+.hero {
+    position: relative;
+    background: linear-gradient(
+      rgba(13, 13, 13, 0.85),
+      rgba(13, 13, 13, 0.85)
+    ), url('https://images.unsplash.com/photo-1603700920572-5c3b56c1a5a2') center/cover no-repeat;
+    color: var(--text-color);
+    text-align: center;
+    padding: 140px 20px 80px;
+    border-bottom: 2px solid var(--primary-color);
+  }
+  
+  /* Notice Banner Full Width at Top */
+  .notice-banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(48, 48, 48, 0.4); /* soft transparent yellow */
+    backdrop-filter: blur(5px);
+    padding: 0px 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+   
+  }
+  
+  .notice-content {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    color: var(--accent-color);
+    font-weight: 600;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .notice-block {
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  .notice-text {
+    flex: 1;
+    text-align: left;
+    margin-left: -20px;
+    font-size: 12px;
+   
+  }
+
+  .p2 {
+    margin-top: -20px;
+  }
+  .close-btn {
+    position: absolute; /* make the button stick to top-right */
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    color: var(--primary-color);
+    z-index: 3;
+  }
+  
+  /* Hero Content */
+  .hero-content {
+    margin-top: 40px;
+  }
+  
+  .hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+  
+  .hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+  
+  .cta-btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 16px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .cta-btn:hover {
+    background-color: #e64a19;
+  }
+  
+  
+
+/* Notice Banner *
+.notice-banner {
+    background-color: var(--accent-color);
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  
+  .close-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  /* Hero Section *
+  .hero {
+    background: linear-gradient(
+      rgba(13, 13, 13, 0.8),
+      rgba(13, 13, 13, 0.8)
+    ), url('https://images.unsplash.com/photo-1603700920572-5c3b56c1a5a2') center cover no-repeat;
+    color: var(--text-color);
+    text-align: center;
+    padding: 100px 20px 80px;
+    border-bottom: 2px solid var(--primary-color);
+  }
+  
+  .hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+  
+  .hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+  
+  .cta-btn {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 14px 28px;
+    border-radius: 8px;
+    font-size: 16px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .cta-btn:hover {
+    background-color: #e64a19;
+  }
+  */
