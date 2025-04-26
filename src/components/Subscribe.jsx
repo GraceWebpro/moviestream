@@ -51,12 +51,22 @@ function Subscribe() {
       console.error('Subscription failed:', error);
       setError(true);
       setSuccess(false);
+
+      // Hide error message after 5 seconds (optional)
+      setTimeout(() => {
+        setError(false);
+      }, 5000);
     }
   };
 
   return (
     <div className="subscribe-section">
       <h2>Subscribe to get the latest updates</h2>
+      {successMessage && (
+        <p className="success-message">Thank you for subscribing!</p>
+      )}
+      {error && <div style={{ color: 'red', marginTop: '20px' }}>Subscription failed. Try again.</div>}
+
       <form onSubmit={handleSubmit}>
         <input
           type="email"
@@ -67,11 +77,7 @@ function Subscribe() {
         />
         <button type="submit">Subscribe</button>
       </form>
-      {successMessage && (
-        <p className="success-message">Thank you for subscribing!</p>
-      )}
-      {error && <div style={{ color: 'red', marginTop: '20px' }}>Subscription failed. Try again.</div>}
-
+      
     </div>
   );
 }

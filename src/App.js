@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import Home from './pages/home/Home';
 import { ThemeProvider } from './contexts/ThemeContext';
 import './styles/Main.css';
+import MoviesPage from './pages/movies/MoviesPage';
 
 function App() {
   return (
@@ -12,6 +13,8 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/movies" element={<MoviesPage />} />
+
         </Routes>
         <Footer />
       </Router>
