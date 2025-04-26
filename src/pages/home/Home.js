@@ -1,6 +1,8 @@
 import React from 'react'
 import HomeMovieList from './HomeMovieList'
 import Hero from './Hero';
+import MovieGenreSlider from '../../components/MovieGenreSlider';
+import CategoriesSection from './Categories';
 
 
 
@@ -8,17 +10,10 @@ const Home = () => {
     
     return (
         <div className='home-page'>
-
-        {/* Notice Banner *
-        {showNotice && (
-            <div className="notice-banner">
-            <p>🚨 Welcome to our new movie site! Stay tuned for updates.</p>
-            <button className="close-btn" onClick={handleCloseNotice}>❌</button>
-            </div>
-        )}*/}
-
-        <Hero />
-        <HomeMovieList />
+            <Hero />
+            <MovieGenreSlider />
+            <CategoriesSection />
+            <HomeMovieList />
         </div>
     )
 }
