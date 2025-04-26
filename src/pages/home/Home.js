@@ -3,6 +3,12 @@ import HomeMovieList from './HomeMovieList'
 import Hero from './Hero';
 import MovieGenreSlider from '../../components/MovieGenreSlider';
 import CategoriesSection from './Categories';
+import FeaturedMovies from '../../components/FeaturedMovie';
+import TopPicks from '../../components/TopPicks';
+import PopularActors from '../../components/PopularActors';
+import TrendingNowCarousel from '../../components/TrendingNow';
+import NewRelease from '../../components/NewRelease';
+import Subscribe from '../../components/Subscribe';
 
 
 
@@ -13,7 +19,13 @@ const Home = () => {
             <Hero />
             <MovieGenreSlider />
             <CategoriesSection />
-            <HomeMovieList />
+            <FeaturedMovies />
+            <TopPicks />
+            <PopularActors />
+            <TrendingNowCarousel />
+            <NewRelease />
+            <Subscribe />
+           
         </div>
     )
 }

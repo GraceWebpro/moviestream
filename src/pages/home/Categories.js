@@ -90,7 +90,7 @@ const CategoriesSection = () => {
 
   return (
     <section className={`categories-wrapper ${isVisible ? "fade-in" : ""}`}>
-      <h2 className="categories-title">Browse by Category</h2>
+      <h2 className="categories-title">Explore Genres</h2>
 
       <div className="categories-container">
   {showButtons && (

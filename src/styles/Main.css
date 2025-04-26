@@ -392,16 +392,19 @@ body {
 
   /* categories section */
   .categories-wrapper {
-    text-align: center;
+    text-align: left;
     padding: 40px 20px;
     max-width: 1200px;
     margin: 0 auto;
+    background-color: #1a1a1a;
+
   }
   
   .categories-title {
     font-size: 2rem;
     margin-bottom: 20px;
     color: var(--text-color);
+    text-align: left !important;
   }
   
   .categories-container {
@@ -588,3 +591,370 @@ body {
   right: 0;
   background: linear-gradient(to left, rgba(0, 0, 0, 0.3), transparent);
 }
+
+
+/* categories css ends here */
+
+
+/* featured css starts here */
+/* FeaturedMovies.css */
+
+.featured-section {
+  padding: 60px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.featured-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: left !important;
+  margin-bottom: 10px;
+}
+
+/* Main Featured Movie */
+.main-featured {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  margin-bottom: 50px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.main-thumbnail {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+.main-info {
+  position: absolute;
+  bottom: 20px;
+  left: 30px;
+  color: #fff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.7);
+}
+
+.main-title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.main-genre {
+  font-size: 1rem;
+  margin-top: 8px;
+}
+
+/* Featured Movie Grid */
+.featured-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+
+
+
+
+.movie-thumbnail {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.movie-info {
+  padding: 16px;
+}
+
+.movie-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.movie-genre {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* RESPONSIVE */
+@media (min-width: 600px) {
+  .featured-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .featured-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .main-thumbnail {
+    height: 500px;
+  }
+}
+
+/* Loading and Error */
+.loading, .error {
+  text-align: center;
+  padding: 60px 0;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+/* top picks css */
+.top-picks-section {
+  padding: 50px 20px;
+  background-color: #1a1a1a;
+}
+
+.top-picks-header {
+  max-width: 1200px;
+  margin: 0 auto 40px auto;
+  text-align: left;
+}
+
+.top-picks-header h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #fff;
+  text-align: left;
+}
+
+.top-picks-header p {
+  font-size: 1rem;
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .top-pick-image {
+    height: 220px;
+  }
+
+  .top-picks-header h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .top-pick-image {
+    height: 180px;
+  }
+}
+
+/* top picks css ends here */
+
+/* popular actors starts here */
+.popular-actors-carousel {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: left !important;
+}
+
+.actor-card {
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.actor-card:hover {
+  transform: translateY(-6px);
+}
+
+.actor-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.actor-name {
+  margin-top: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* popular css ends here */
+
+/* trending css starts here */
+.trending-now-carousel {
+  padding: 40px 20px;
+  background-color: #1a1a1a;  /* or your site background */
+  color: #fff;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: left;
+  padding-left: 10px;
+}
+
+.movie-card {
+  background-color: #1c1c1c;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.movie-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.1);
+}
+
+.movie-image {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.movie-title {
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: #e50914; /* or any accent color you want */
+  margin-top: 8px;
+  border-radius: 2px;
+}
+
+.new-releases-section {
+  padding: 40px 20px;
+  background-color: #0a0a0a; /* Keep consistent */
+  color: #fff;
+}
+
+/* subscription starts here */
+/*
+.subscribe-section {
+  width: 100%;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+  color: #ffffff;
+  text-align: center;
+}
+*/
+.subscribe-section {
+  width: 100%;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+  color: #ffffff;
+  text-align: center;
+}
+
+.subscribe-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 25px;
+  font-weight: bold;
+}
+
+.subscribe-section form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.subscribe-section input {
+  padding: 12px 18px;
+  width: 300px;
+  max-width: 90%;
+  border: 1px solid #333;
+  border-radius: 30px;
+  font-size: 1rem;
+  background-color: #222;
+  color: #fff;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.subscribe-section input::placeholder {
+  color: #aaa;
+}
+
+.subscribe-section input:focus {
+  border-color: #e50914;
+  background-color: #111;
+}
+
+.subscribe-section button {
+  padding: 12px 25px;
+  background-color: #e50914;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.subscribe-section button:hover {
+  background-color: #bf0812;
+}
+
+.success-message {
+  margin-top: 25px;
+  color: #4caf50;
+  font-size: 1.2rem;
+  opacity: 0;
+  animation: fadeIn 1s forwards;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Background animation */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .subscribe-section h2 {
+    font-size: 2rem;
+  }
+
+  .subscribe-section form {
+    flex-direction: column;
+  }
+
+  .subscribe-section input {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .subscribe-section button {
+    width: 100%;
+  }
+}
+
+/* subscription ends here */
