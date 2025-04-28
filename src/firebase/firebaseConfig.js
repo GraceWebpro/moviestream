@@ -1,6 +1,9 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword
+} from "firebase/auth";
 
 
 // Your web app's Firebase configuration
@@ -18,3 +21,32 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
+//const analytics = getAnalytics(app);
+export const auth = getAuth(app);
+export const storage = getStorage(app);
+//const provider = new GoogleAuthProvider();
+
+
+// Email/password authentication functions
+export const registerWithEmail = async (email, password) => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      return userCredential; // <<<<< VERY IMPORTANT
+    } catch (error) {
+      throw error; // <<<<< Instead of alert here, throw the error to handle it properly outside
+    }
+  };
+  
+  export const loginWithEmail = async (email, password) => {
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      alert("Login successful!");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+  
+  export const logout = async () => {
+    await signOut(auth);
+    alert("Logged out successfully!");
+  };

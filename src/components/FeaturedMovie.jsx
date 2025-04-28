@@ -2,8 +2,9 @@ import React from 'react';
 import { motion } from 'framer-motion'; // for animations
 import useFetchMovies from '../hooks/useFetchMovies'; // adjust path if needed
 import '../styles/Main.css';
+import { Link } from 'react-router-dom';
 
-const FeaturedMovies = () => {
+const FeaturedMovies = ({ movie }) => {
     const { movies, loading, error } = useFetchMovies();
 
     if (loading) return <p>Loading featured movies...</p>;
@@ -25,26 +26,37 @@ const FeaturedMovies = () => {
     <section className="featured-section">
       <h2 className="featured-title section-title">Featured Movies</h2>
       <div className="movie-grid">
-        {featuredMovies.slice(0, 5).map((movie, index) => (
-          <motion.div 
-            key={movie.id} 
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            className="movie-card"
-          >
-            <img 
-              src={movie.thumbnailUrl} 
-              alt={movie.title} 
-              className="movie-thumbnail"
-            />
-            <div className="movie-info">
-              <h3 className="movie-title">{movie.title}</h3>
-              <p className="movie-genre">{movie.genre}</p>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+  {featuredMovies.slice(0, 5).map((movie, index) => (
+    <motion.div 
+      key={movie.id} 
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      className="movie-card"
+    >
+      <Link to={`/movie/${movie.id}`}> {/* Fix: use movie.id, not mainFeatured.id */}
+        <img 
+          src={movie.thumbnailUrl} 
+          alt={movie.title} 
+          className="movie-thumbnail"
+        />
+        <div className="movie-info">
+          <h3 className="movie-title">{movie.title}</h3>
+          <p className="movie-year-genre">
+            {movie.releaseYear} • {movie.category}
+          </p>
+          <p className="movie-year-genre">
+            {movie.status}
+          </p>
+          {movie.rating && (
+            <p className="movie-rating">⭐ {movie.rating}/10</p>
+          )}
+        </div>
+      </Link>
+    </motion.div>
+  ))}
+</div>
+
     </section>
   );
 };

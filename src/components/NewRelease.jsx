@@ -6,6 +6,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import '../styles/Main.css';
 import useFetchMovies from '../hooks/useFetchMovies'; // adjust path if needed
+import { Link } from 'react-router-dom';
 
 const NewRelease = () => {
   const { movies, loading } = useFetchMovies();
@@ -37,13 +38,27 @@ const NewRelease = () => {
       >
         {newReleaseMovies.map((movie) => (
           <SwiperSlide key={movie.id}>
+            
             <div className="movie-card">
+            <Link to={`/movie/${movie.id}`}>
               <img
                 src={movie.thumbnailUrl}
                 alt={movie.title}
                 className="movie-image"
               />
-              <p className="movie-title">{movie.title}</p>
+             <div className="movie-info">
+          <h3 className="movie-title">{movie.title}</h3>
+          <p className="movie-year-genre">
+            {movie.releaseYear} • {movie.category}
+          </p>
+          <p className="movie-year-genre">
+            {movie.status}
+          </p>
+          {movie.rating && (
+            <p className="movie-rating">⭐ {movie.rating}/10</p>
+          )}
+        </div>
+        </Link>
             </div>
           </SwiperSlide>
         ))}

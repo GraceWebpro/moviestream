@@ -1,4 +1,5 @@
 import React, { useState }  from 'react'
+import { Link } from 'react-router-dom';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import '../../styles/Main.css'
@@ -26,7 +27,10 @@ const Hero = () => {
         <div className="hero-content">
           <h1>Unlimited Movies, TV Shows, and More</h1>
           <p>Stream and download your favorite movies anytime, anywhere.</p>
-          <button className="cta-btn">Browse Movies</button>
+          <Link to="/movies">
+            <button className="cta-btn">Browse Movies</button>
+          </Link>
+
         </div>
     </section>
   )

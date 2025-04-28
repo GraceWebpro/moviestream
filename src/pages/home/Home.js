@@ -9,6 +9,7 @@ import PopularActors from '../../components/PopularActors';
 import TrendingNowCarousel from '../../components/TrendingNow';
 import NewRelease from '../../components/NewRelease';
 import Subscribe from '../../components/Subscribe';
+import HomeContact from './HomeContact';
 
 
 
@@ -24,6 +25,7 @@ const Home = () => {
             <PopularActors />
             <TrendingNowCarousel />
             <NewRelease />
+            <HomeContact />
             <Subscribe />
            
         </div>

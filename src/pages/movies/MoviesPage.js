@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { db } from "../../firebase/firebaseConfig"; // Make sure to import your Firebase config
 import { collection, query, where, getDocs } from "firebase/firestore";
 import '../../styles/Main.css';
+import { Link } from 'react-router-dom';
 
 const categories = [
   { name: "Action" },
@@ -109,9 +110,7 @@ const handleCategoryChange = (category) => {
         </button>
 
         <div className="sort-dropdown">
-          <label htmlFor="sort-select">
-            Sort by:
-          </label>
+          <label htmlFor="sort-select">Sort by:</label>
           <select
             id="sort-select"
             value={sortOption}
@@ -149,11 +148,25 @@ const handleCategoryChange = (category) => {
           <p>{error}</p>
         ) : sortedMovies.length > 0 ? (
           sortedMovies.map((movie, index) => (
+            
             <div key={index} className="movie-card">
+              <Link to={`/movie/${movie.id}`}>
               <img src={movie.thumbnailUrl} alt={movie.title} />
-              <h4>{movie.title}</h4>
-              <p>{movie.genre}</p> {/* Example genre, adjust as per your data */}
+              <div className="movie-info">
+          <h3 className="movie-title">{movie.title}</h3>
+          <p className="movie-year-genre">
+            {movie.releaseYear} • {movie.category}
+          </p>
+          <p className="movie-year-genre">
+            {movie.status}
+          </p>
+          {movie.rating && (
+            <p className="movie-rating">⭐ {movie.rating}/10</p>
+          )}
+        </div>
+            </Link>
             </div>
+            
           ))
         ) : (
           <p>No movies found.</p>

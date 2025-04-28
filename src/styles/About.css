@@ -1,0 +1,50 @@
+.about-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    color: #fff;
+    line-height: 1.6;
+  }
+  
+  .about-container h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 36px;
+    color: var(--first-color); /* optional: your site main color */
+  }
+  
+  .about-intro {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .about-section {
+    margin-bottom: 30px;
+  }
+  
+  .about-section h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #fff;
+  }
+  
+  .about-section p, .about-section ul {
+    font-size: 18px;
+  }
+  
+  .about-section ul {
+    padding-left: 20px;
+  }
+  
+  .about-section ul li {
+    margin-bottom: 8px;
+  }
+  
+  .about-thankyou {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
