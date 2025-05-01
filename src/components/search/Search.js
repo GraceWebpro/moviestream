@@ -47,14 +47,14 @@ const Search = () => {
     <div>
       <SearchBar onSearch={handleSearch} />
       {loading && <p style={{ marginLeft: '15px', cursor: 'pointer' }}>Loading...</p>}
-      {!loading && noResults && <p style={{ color: '#000', marginLeft: '15px', cursor: 'pointer' }}>No results found.</p>}
+      {!loading && noResults && <p style={{ color: '#fff', marginLeft: '15px', cursor: 'pointer' }}>No results found.</p>}
       {!loading && !noResults && movies.length > 0 && (
         <ul>
           {movies.map((movie) => (
             <li 
               key={movie.id} 
               onClick={() => handleMovieClick(movie.id)} 
-              style={{ color: '#000', marginLeft: '15px', cursor: 'pointer' }}
+              style={{ color: '#fff', marginLeft: '15px', cursor: 'pointer' }}
             >
               {movie.title}
             </li>

@@ -24,7 +24,7 @@ const TrendingNowCarousel = () => {
 
   return (
     <div className="trending-now-carousel">
-      <h2 className="section-title">Trending Now</h2>
+      <h2 className="section-title">Popular Now</h2>
       <Swiper
         modules={[Navigation, Pagination]}
         spaceBetween={20}

@@ -67,7 +67,7 @@ const UploadEpisode = () => {
         const epCollRef = collection(db, `movies/${movieId}/episodes`)
         //const movieRef = doc(movieCollectionRef, movieId)
         await addDoc(epCollRef, {
-          episodeNumber,
+          episodeNumber: Number(episodeNumber),
           airDate,
           videoUrl: videoUrl,
           createdAt: serverTimestamp(),

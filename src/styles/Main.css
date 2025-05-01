@@ -253,7 +253,6 @@ body {
     gap: 10px;
     color: var(--accent-color);
     font-weight: 600;
-    font-size: 12px;
     text-align: center;
   }
 
@@ -317,15 +316,63 @@ body {
     background-color: #e64a19;
   }
   
+  @media (max-width: 768px) {
+    .notice-content {
+      width: 85%;
+    }
+
+    .notice-text {
+      font-size: 14px !important;
+    }
+
+    .close-btn {
+      font-size: 14px !important;
+      top: 0;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .notice-content {
+      width: 80%;
+    }
+
+    .notice-text {
+      font-size: 14px !important;
+    }
+
+    .close-btn {
+      font-size: 14px !important;
+      top: 5px;
+    }
+  }
+
+  @media (max-width: 390px) {
+    .notice-content {
+      width: 75%;
+    }
+
+    .notice-text {
+      font-size: 14px !important;
+    }
+
+    .close-btn {
+      font-size: 14px !important;
+      top: 0;
+    }
+  }
 /* slider css starts here */
 /* Slider container */
 .genre-slider-container {
   width: 100%;
   max-width: 1200px;
-    padding: 30px 20px;
-    text-align: center;
-    border-radius: 10px;
-  }
+  padding: 30px 20px;
+  text-align: center;
+  border-radius: 10px;
+  margin: 0 auto;         /* Center the container */
+  overflow: hidden;       /* Prevent children from overflowing */
+  position: relative;     /* Ensure arrows are positioned relative to this */
+}
+
   
   
   
@@ -345,7 +392,7 @@ body {
   }
   
   .genre-item span {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 600;
     color: #ccc;
     white-space: nowrap;
@@ -369,8 +416,19 @@ body {
     font-size: 24px;
     background-color: transparent;
     border: none;
+    z-index: 2;
+  width: 30px;
+  height: 30px;
+  transform: translateY(-50%);
   }
   
+  .slick-prev {
+    left: 5px !important;
+  }
+  
+  .slick-next {
+    right: 5px !important;
+  }
   /* Customize the dots (navigation) */
   .slick-dots li button:before {
     color: #ff5722; /* Color for the dots */
@@ -428,7 +486,6 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     color: var(--text-color);
     transition: transform 0.3s ease;
-    animation: fadeUp 0.8s forwards;
     opacity: 0;
   }
   
@@ -487,11 +544,11 @@ body {
  
   
   .scroll-btn.left {
-    left: -30px;
+    left: -10px;
   }
   
   .scroll-btn.right {
-    right: -30px;
+    right: -10px;
   }
   
   
@@ -591,9 +648,18 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 20px;
-  padding: 20px;
+  padding: 0; /* or reduce it */
+  margin: 0;
 }
-
+.movie-card {
+  background-color: #212121;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
 .movie-card a {
   text-decoration: none; /* removes underline */
   color: inherit; /* makes the text color same as parent */
@@ -606,6 +672,9 @@ body {
   height: auto;
   aspect-ratio: 2/3;
   display: block;
+  margin: 0;
+  padding: 0;
+  border: none;
 }
 
 .movie-info {
@@ -634,10 +703,24 @@ body {
 }
 
 /* RESPONSIVE */
-@media (min-width: 600px) {
-  .featured-grid {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-width: 600px) {
+  .movie-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    padding: 10px;
+    gap: 15px;
+
   }
+  .featured-section {
+    padding: 60px 10px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .movie-title {
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
 }
 
 @media (min-width: 900px) {
@@ -756,40 +839,9 @@ body {
   padding-left: 10px;
 }
 
-.movie-card {
-  background-color: #1c1c1c;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-}
-
-.movie-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 20px;
-  padding: 20px;
-}
 
 
-.movie-card img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
 
-.movie-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(255, 255, 255, 0.1);
-}
-
-
-.movie-title {
-  padding: 10px;
-  font-size: 16px;
-  font-weight: 500;
-  text-align: left;
-}
 
 .section-title::after {
   content: '';
@@ -1468,4 +1520,17 @@ button:hover {
 
 .contact-button:hover {
   background-color: #0056b3; /* darker shade on hover */
+}
+
+.search-bar .searchh-btn {
+  background-color: var(--accent-color);
+  margin-top: -10px;
+}
+
+.search-bar .searchh-input {
+  border: 1px solid #8f8f8f !important;
+}
+
+.search-bar .searchh-input:focus {
+  border: none !important;
 }

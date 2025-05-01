@@ -12,8 +12,8 @@ const MovieGenreSlider = () => {
     "Sci-Fi",
     "Fantasy",
     "Thriller",
-    "Animation",
-    "Adventure"
+    "History",
+    "Family"
   ];
 
   const settings = {
@@ -33,17 +33,23 @@ const MovieGenreSlider = () => {
       {
         breakpoint: 992,  // For mobile devices
         settings: {
-          slidesToShow: 4
+          slidesToShow: 5
         }
       },
       {
         breakpoint: 768,  // For mobile devices
         settings: {
+          slidesToShow: 4
+        }
+      },
+      {
+        breakpoint: 555,  // For mobile devices
+        settings: {
           slidesToShow: 3
         }
       },
       {
-        breakpoint: 700,  // For mobile devices
+        breakpoint:470,  // For mobile devices
         settings: {
           slidesToShow: 3
         }

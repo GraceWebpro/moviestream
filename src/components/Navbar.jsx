@@ -17,7 +17,7 @@ const Navbar = () => {
       <div className="navbar-container">
         <div className="logo">
             <div className="logo-icon">🎬</div>
-            <span>Movie Stream</span>
+            <span>PlayBox</span>
         </div>
         <div className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`}>
           <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>

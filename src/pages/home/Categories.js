@@ -18,7 +18,8 @@ const CategoriesSection = () => {
   const [loaded, setLoaded] = useState(false);
   const [isScrolledLeft, setIsScrolledLeft] = useState(false);
   const [isScrolledRight, setIsScrolledRight] = useState(false);
-  
+  console.log("Categories:", categories);
+
   useEffect(() => {
     const checkScroll = () => {
       const container = sliderRef.current;
@@ -104,7 +105,7 @@ const CategoriesSection = () => {
       <Link
         to={`/movies?category=${cat.name}`}
         key={cat.name}
-        className={`category-card ${isVisible ? "fade-up" : ""}`}
+        className={`category-card ${isVisible ? "fade-in" : ""}`}
         style={{ animationDelay: `${index * 0.15}s` }}
       >
         <div className="img-wrapper">

@@ -10,6 +10,7 @@ import TrendingNowCarousel from '../../components/TrendingNow';
 import NewRelease from '../../components/NewRelease';
 import Subscribe from '../../components/Subscribe';
 import HomeContact from './HomeContact';
+import Search from '../../components/search/Search';
 
 
 
@@ -19,12 +20,13 @@ const Home = () => {
         <div className='home-page'>
             <Hero />
             <MovieGenreSlider />
+            <Search />
+            <NewRelease />
             <CategoriesSection />
             <FeaturedMovies />
             <TopPicks />
             <PopularActors />
             <TrendingNowCarousel />
-            <NewRelease />
             <HomeContact />
             <Subscribe />
            
