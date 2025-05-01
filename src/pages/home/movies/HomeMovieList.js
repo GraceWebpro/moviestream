@@ -1,6 +1,6 @@
-import useFetchMovies from '../../hooks/useFetchMovies';
-import MovieCard from '../../components/MovieCard';
-import '../../styles/Main.css';
+import useFetchMovies from '../../../hooks/useFetchMovies';
+import MovieCard from '../../../components/MovieCard';
+import '../../../styles/Main.css';
 
 const HomeMovieList = () => {
   const { movies, loading } = useFetchMovies();

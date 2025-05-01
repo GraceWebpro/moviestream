@@ -2,7 +2,7 @@ import React, { useState }  from 'react'
 import { Link } from 'react-router-dom';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import '../../styles/Main.css'
+import '../../../styles/Main.css'
 
 const Hero = () => {
     const [showNotice, setShowNotice] = useState(true);

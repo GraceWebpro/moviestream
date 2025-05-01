@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Routes, Route, useLocation, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Home from './pages/home/Home';
+import Home from './pages/home/movies/MovieHome';
 import { ThemeProvider } from './contexts/ThemeContext';
 import './styles/Main.css';
 import MoviesPage from './pages/movies/MoviesPage';
@@ -14,6 +14,8 @@ import MovieDetails from "./pages/movies/MovieDetails";
 import EpisodePage from "./pages/movies/EpisodePage";
 import HowTo from "./pages/movies/HowTo";
 import About from "./pages/about/About";
+import FlashPage from "./pages/flashScreen/FlashPage";
+import MusicHomepage from "./pages/home/music/MusicHomepage";
 //import EpisodeDownload from "./pages/movies/EpisodeDownload";
 
 function App() {
@@ -22,20 +24,24 @@ function App() {
 
   // Determine if the current route is for the admin page
   const isAdminPage = location.pathname.startsWith('/admin');
-  const isTemplatePage = location.pathname.startsWith("/templates");
+
+  // Determine if the current route is for the flash page
+  const isFlashPage = location.pathname === "/";
 
   return (
     <ThemeProvider>
 
-  
-      {!isAdminPage && <Navbar />}
+      {!isFlashPage && !isAdminPage && <Navbar />}
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route eaxct path="/" element={<FlashPage />} />
+          <Route path="/movie-homepage" element={<Home />} />
+          <Route path="/music-homepage" element={<MusicHomepage />} />
+
           <Route path="/movies" element={<MoviesPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/movie/:id" element={<MovieDetails />} />
           {/*<Route path="/movie/:movieId/episode/:episodeNumber" component={EpisodePage} />*/}
-          <Route path="/movie/:title/episode/:episodeNumber" element={<EpisodePage />} />
+          <Route path="/movie/:title/:episodeNumber" element={<EpisodePage />} />
           <Route path='/how-to-download' element={<HowTo />} />
 
           {/* Admin Routes */}
@@ -51,7 +57,7 @@ function App() {
           <Route path="*" element={<Navigate to="/" />} />
 
         </Routes>
-        {!isAdminPage && <Footer />}
+        {!isFlashPage && !isAdminPage && <Footer />}
  
     </ThemeProvider>
   );

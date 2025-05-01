@@ -53,7 +53,11 @@ const [selectedCategories, setSelectedCategories] = useState([]);
       
       try {
         const querySnapshot = await getDocs(q);
-        const movieList = querySnapshot.docs.map((doc) => doc.data());
+        const movieList = querySnapshot.docs.map((doc) => ({
+          id: doc.id,            // ✅ Include the Firestore document ID
+          ...doc.data(),         // ✅ Spread the rest of the movie data
+        }));
+        
         setMovies(movieList);
       } catch (err) {
         console.error("Error fetching movies:", err);

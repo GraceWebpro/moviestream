@@ -47,14 +47,23 @@ const UploadEpisode = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!file || !episodeNumber) {
-      alert("Please select a video file and episode number to upload.")
+      alert("Please select a video file and episode number to upload.");
+      return;
     }
-
-
-    // Upload thumbnail file
-    const videoRef = ref(storage, `videos/${file.name}`);
-    const uploadTask = uploadBytesResumable(videoRef, file);
-
+  
+    const selectedMovie = movies.find(m => m.id === movieId);
+    const movieTitle = selectedMovie?.title?.replace(/\s+/g, '.').toLowerCase() || 'movie';
+  
+    // ➕ Pad the episode number to 2 digits (e.g., 01, 02, ..., 10)
+    const paddedEpisode = episodeNumber.toString().padStart(2, '0');
+  
+    // ➕ Use the padded number in the file name
+    const customFileName = `${movieTitle}-episode-${paddedEpisode}-(PlayBox).mp4`;
+    const renamedFile = new File([file], customFileName, { type: file.type });
+  
+    const videoRef = ref(storage, `videos/${customFileName}`);
+    const uploadTask = uploadBytesResumable(videoRef, renamedFile);
+  
     uploadTask.on('state_changed', (snapshot) => {
       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       setUploadProgress(progress);
@@ -62,16 +71,17 @@ const UploadEpisode = () => {
       console.error('Error uploading video:', error);
     }, async () => {
       const videoUrl = await getDownloadURL(videoRef);
-
+  
       try {
-        const epCollRef = collection(db, `movies/${movieId}/episodes`)
-        //const movieRef = doc(movieCollectionRef, movieId)
+        const epCollRef = collection(db, `movies/${movieId}/episodes`);
         await addDoc(epCollRef, {
           episodeNumber: Number(episodeNumber),
+          paddedEpisode: paddedEpisode, // ➕ Optionally store it for display or sorting
           airDate,
           videoUrl: videoUrl,
           createdAt: serverTimestamp(),
         });
+  
         alert('Video uploaded successfully!');
         setEpisodeNumber('');
         setAirDate('');
@@ -79,13 +89,12 @@ const UploadEpisode = () => {
         setUploadProgress(0);
       } catch (error) {
         console.error('Error saving video metadata:', error);
-        alert("Error uploading video. Pleae try again.")
-
+        alert("Error uploading video. Please try again.");
       }
     });
-
   };
-
+  
+  
   
   const getNextVideoNumber = async (episodeDocRef) => {
     const videoRef = collection(episodeDocRef, 'videos');
@@ -101,7 +110,7 @@ const UploadEpisode = () => {
   };
 
   return (
-    <div className='upload-container'>
+    <div className='upload-container' style={{ color: '#000'}}>
      
      <h2>Upload New Episode</h2>
        

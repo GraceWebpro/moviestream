@@ -162,7 +162,9 @@ const tags = movie.tags || [];
               {episodes.map((episode) => (
               <li key={episode.id}>
                   <h3>Episode {episode.episodeNumber}</h3>
-                  <Link to={`/movie/${movie.title}/episode/${episode.episodeNumber}?videoUrl=${encodeURIComponent(episode.videoUrl)}`}>
+                  <Link
+                    to={`/movie/${movie.title}/${episode.episodeNumber}?videoUrl=${encodeURIComponent(episode.videoUrl)}&thumbnailUrl=${encodeURIComponent(movie.thumbnailUrl)}`}
+                  >
                   <button className='card-btn' style={{ marginTop: '10px' }}>Download Episode</button>
                   </Link>
               </li>
