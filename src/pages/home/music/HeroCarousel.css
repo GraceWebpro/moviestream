@@ -1,0 +1,128 @@
+/* Hero Section */
+.hero-section {
+    height: 60vh; /* Set hero height to 60% of the viewport height */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    overflow: hidden;
+    border-bottom: 2px solid var(--primary-color);
+
+  }
+  
+  /* Overlay */
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 2rem;
+    box-sizing: border-box;
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+  
+  /* Left: Slanted Static Image *
+  .slanted-image-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .slanted-image {
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    transform: rotate(-10deg); /* Slanted effect *
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  */
+
+  .slanted-image-container {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 40vw; /* Adjust width to control how much space the image takes */
+    z-index: 1;
+  }
+  
+  .slanted-image {
+    height: 120%;
+    width: auto;
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    object-fit: contain;
+    transform: rotate(-10deg);
+    
+  }
+
+  /* Right: Main Content */
+  .hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 1rem;
+  }
+  
+  .hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .hero-content button {
+    background: var(--primary-color);
+    border: none;
+    padding: 0.8rem 1.6rem;
+    color: white;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .music-hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .music-cta-button {
+    background: var(--primary-color);
+          padding: '0.7rem 1.4rem';
+          border: 'none';
+          color: 'white';
+          font-weight: 'bold';
+          cursor: 'pointer';
+          border-radius: '4px';
+  }
+  
+  .music-cta-button:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-5px); /* Slight hover effect */
+  }
+  
+  .music-cta-button.secondary {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: #fff;
+  }
+  
+  .music-cta-button.secondary:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+    transform: translateY(-5px); /* Slight hover effect */
+  }
+  

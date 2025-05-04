@@ -28,7 +28,7 @@ const Hero = () => {
           <h1>Unlimited Movies, TV Shows, and More</h1>
           <p>Stream and download your favorite movies anytime, anywhere.</p>
           <Link to="/movies">
-            <button className="cta-btn">Browse Movies</button>
+            <button className="primary-btn">Browse Movies</button>
           </Link>
 
         </div>

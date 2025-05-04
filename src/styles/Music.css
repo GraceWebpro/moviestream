@@ -40,29 +40,28 @@
   }
   
   .music-cta-button {
-    background-color: #FF7043; /* Classic vibrant color */
-    color: #fff;
-    font-size: 1.2rem;
-    padding: 15px 30px;
-    border: none;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
+    background: var(--primary-color);
+          padding: '0.7rem 1.4rem';
+          border: 'none';
+          color: 'white';
+          font-weight: 'bold';
+          cursor: 'pointer';
+          border-radius: '4px';
   }
   
   .music-cta-button:hover {
-    background-color: #F4511E;
+    background-color: var(--primary-color);
     transform: translateY(-5px); /* Slight hover effect */
   }
   
   .music-cta-button.secondary {
     background-color: transparent;
-    border: 2px solid #FF7043;
-    color: #FF7043;
+    border: 2px solid var(--primary-color);
+    color: #fff;
   }
   
   .music-cta-button.secondary:hover {
-    background-color: #FF7043;
+    background-color: var(--primary-color);
     color: #fff;
     transform: translateY(-5px); /* Slight hover effect */
   }
@@ -78,4 +77,61 @@
     background: rgba(0, 0, 0, 0.3); /* Dark overlay */
     z-index: 1;
   }
+
+  .search-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  .search-container form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .search-container input[type="text"] {
+    padding: 10px 15px;
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .search-container button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .search-container button:hover {
+    background-color: #0056b3;
+  }
+  
+  .search-results ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .search-results li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .search-results li a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .search-results li a:hover {
+    text-decoration: underline;
+  }
+  
+  
   

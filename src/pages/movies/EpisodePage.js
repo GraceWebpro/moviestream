@@ -64,8 +64,9 @@ const EpisodePage = () => {
         <button
           onClick={handleDownload}
           disabled={loading}
+          className='download-btn'
           style={{
-            backgroundColor: 'var(--first-color)',
+            backgroundColor: '#1db954',
             color: '#fff',
             padding: '15px 20px',
             fontSize: '18px',

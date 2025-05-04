@@ -26,8 +26,10 @@ const Navbar = () => {
 
   const musicNavItems = [
     { name: "Home", path: "/music-homepage" },
-    { name: "Artists", path: "/artists" },
-    { name: "Albums", path: "/albums" }
+    { name: "Songs", path: "/songs" },
+    { name: "Albums", path: "/albums" },
+    { name: "Dj Mix", path: "/dj-mix" },
+    { name: "Artists", path: "/artists" }
   ];
 
   // Choose the correct nav items based on the current section (Movie or Music)

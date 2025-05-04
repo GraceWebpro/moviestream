@@ -12,6 +12,10 @@ import EditMovie from "./EditMovie";
 import DeleteMovie from "./DeleteMovie";
 import { Link } from "react-router-dom";
 import AnalyticsPage from "./Analytics";
+import MusicUpload from "./UploadMusic";
+import EditContent from "./EditMovie";
+import DeleteContent from "./DeleteMovie";
+import UploadContent from "./UploadMovie";
 
 
 const AdminDashboard = () => {
@@ -92,11 +96,10 @@ const AdminDashboard = () => {
           {user && <p className="admin-email">Welcome, {user.email}</p>}
           <ul>
             <li onClick={() => setActiveTab("dashboard")} className={activeTab === "dashboard" ? "active" : ""}>📊 Dashboard</li>
-            <li onClick={() => setActiveTab("upload")} className={activeTab === "upload" ? "active" : ""}>📤 Upload Movies</li>
-            <li onClick={() => setActiveTab("uploadEpisode")} className={activeTab === "uploadEpisode" ? "active" : ""}>📤 Upload Episode</li>
+            <li onClick={() => setActiveTab("upload")} className={activeTab === "upload" ? "active" : ""}>📤 Upload</li>
 
-            <li onClick={() => setActiveTab("edit")} className={activeTab === "edit" ? "active" : ""}>✏️ Edit Movie</li>
-            <li onClick={() => setActiveTab("delete")} className={activeTab === "delete" ? "active" : ""}>🗑️ Delete Movie</li>
+            <li onClick={() => setActiveTab("edit")} className={activeTab === "edit" ? "active" : ""}>✏️ Edit </li>
+            <li onClick={() => setActiveTab("delete")} className={activeTab === "delete" ? "active" : ""}>🗑️ Delete </li>
             <li onClick={() => setActiveTab("settings")} className={activeTab === "settings" ? "active" : ""}>⚙️ User Settings</li>
           </ul>
           <button className="logout-btn" onClick={logout}>Logout</button>
@@ -152,10 +155,9 @@ const AdminDashboard = () => {
           </table>
         </div>
       )}
-      {activeTab === "upload" && <UploadMovie/>}
-      {activeTab === "uploadEpisode" && <UploadEpisode />}
-      {activeTab === "edit" && <EditMovie movies={movies}/>} {/* Pass projects */}
-      {activeTab === "delete" && <DeleteMovie movies={movies} />} {/* Pass projects */}
+      {activeTab === "upload" && <UploadContent/>}
+      {activeTab === "edit" && <EditContent movies={movies}/>} {/* Pass projects */}
+      {activeTab === "delete" && <DeleteContent movies={movies} />} {/* Pass projects */}
       {activeTab === "analytics" && <AnalyticsPage />}
       {activeTab === "settings" && <UserSettings />}
     </div>

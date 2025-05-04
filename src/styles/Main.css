@@ -300,7 +300,7 @@ body {
     margin-bottom: 30px;
   }
   
-  .cta-btn {
+  .movies-btn {
     background-color: var(--primary-color);
     color: white;
     padding: 14px 28px;
@@ -650,7 +650,18 @@ body {
   gap: 20px;
   padding: 0; /* or reduce it */
   margin: 0;
+  flex: 1;
 }
+
+.music-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+  padding: 0; /* or reduce it */
+  margin: 0;
+  flex: 1;
+}
+
 .movie-card {
   background-color: #212121;
   border-radius: 10px;
@@ -660,6 +671,9 @@ body {
   padding: 0;
   margin: 0;
 }
+
+
+
 .movie-card a {
   text-decoration: none; /* removes underline */
   color: inherit; /* makes the text color same as parent */
@@ -675,6 +689,63 @@ body {
   margin: 0;
   padding: 0;
   border: none;
+}
+
+.music-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: none;
+  aspect-ratio: 1 / 1; /* for square cover art */
+  object-fit: cover;
+}
+
+
+.music-card {
+  background-color: #212121;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  width: 100%; /* Ensure it takes up full width of the swiper slide */
+  display: flex; /* Center the content horizontally */
+  flex-direction: column;
+}
+
+.music-card a {
+  text-decoration: none; /* removes underline */
+  color: inherit; /* makes the text color same as parent */
+  display: block; /* makes the link fill the card */
+  width: 100%;
+}
+
+.music-card img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1; /* Maintain square aspect ratio, or adjust as needed */
+  object-fit: cover; /* Make sure image fits without stretching */
+  margin: 0;
+}
+
+.music-info {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center text */
+}
+
+.music-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.music-year-genre {
+  font-size: 1rem;
+  margin: 5px 0;
 }
 
 .movie-info {
@@ -913,6 +984,7 @@ body {
   color: #fff;
   outline: none;
   transition: all 0.3s ease;
+  text-align: left;
 }
 
 .subscribe-section input::placeholder {
@@ -1049,6 +1121,8 @@ body {
 
 .template-content.with-filters {
   display: flex;
+  gap: 20px;
+  align-items: flex-start
 }
 
 .template-content.no-filters {

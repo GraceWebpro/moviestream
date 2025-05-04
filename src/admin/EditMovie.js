@@ -3,65 +3,52 @@ import { db, storage } from "../firebase/firebaseConfig";
 import { doc, updateDoc } from "firebase/firestore";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-function EditMovie({ movies }) {
-  const [selectedMovie, setSelectedMovie] = useState("");
+function EditContent({ movies, music }) {
+  const [selectedContent, setSelectedContent] = useState(""); // Content ID for movie or music
   const [newTitle, setNewTitle] = useState("");
   const [newCategory, setNewCategory] = useState("");
   const [newDescription, setNewDescription] = useState("");
-  const [newCast, setNewCast] = useState("");
   const [newTags, setNewTags] = useState("");
-  const [newReleaseYear, setNewReleaseYear] = useState("");
-  const [newStatus, setNewStatus] = useState("");
-  const [isFeatured, setIsFeatured] = useState(false);
-  const [isTopPick, setIsTopPick] = useState(false);
-  const [isTrending, setIsTrending] = useState(false);
-  const [isNewRelease, setIsNewRelease] = useState(false);
   const [thumbnailFile, setThumbnailFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [isMovie, setIsMovie] = useState(true); // Toggle between movie and music edit
 
   useEffect(() => {
-    if (selectedMovie) {
-      const movie = movies.find((p) => p.id === selectedMovie);
-      if (movie) {
-        setNewTitle(movie.title || "");
-        setNewCategory(movie.category || "");
-        setNewDescription(movie.description || "");
-        setNewCast(movie.cast ? movie.cast.join(", ") : "");
-        setNewTags(movie.tags ? movie.tags.join(", ") : "");
-        setNewReleaseYear(movie.releaseYear || "");
-        setNewStatus(movie.status || "");
-        setIsFeatured(movie.isFeatured || false);
-        setIsTopPick(movie.isTopPick || false);
-        setIsTrending(movie.isTrending || false);
-        setIsNewRelease(movie.isNewRelease || false);
+    if (selectedContent) {
+      const content = isMovie
+        ? movies.find((p) => p.id === selectedContent)
+        : music.find((p) => p.id === selectedContent);
+
+      if (content) {
+        setNewTitle(content.title || "");
+        setNewCategory(content.category || "");
+        setNewDescription(content.description || "");
+        setNewTags(content.tags ? content.tags.join(", ") : "");
       }
     }
-  }, [selectedMovie, movies]);
+  }, [selectedContent, movies, music, isMovie]);
 
   const handleThumbnailChange = (e) => {
     setThumbnailFile(e.target.files[0]);
   };
 
   const handleUpdate = async () => {
-    if (!selectedMovie) return alert("Please select a movie to edit.");
+    if (!selectedContent) return alert("Please select content to edit.");
 
     setLoading(true);
 
     try {
-      const movieRef = doc(db, "movies", selectedMovie);
+      const contentRef = doc(
+        db,
+        isMovie ? "movies" : "music", // Use movies or music collection based on toggle
+        selectedContent
+      );
 
       let updatedData = {
         title: newTitle,
         description: newDescription,
         category: newCategory,
-        cast: newCast.split(",").map((name) => name.trim()),
         tags: newTags.split(",").map((tag) => tag.trim()),
-        releaseYear: newReleaseYear,
-        status: newStatus,
-        isFeatured,
-        isTopPick,
-        isTrending,
-        isNewRelease,
       };
 
       if (thumbnailFile) {
@@ -82,14 +69,14 @@ function EditMovie({ movies }) {
         });
       }
 
-      await updateDoc(movieRef, updatedData);
+      await updateDoc(contentRef, updatedData);
 
-      alert("Movie updated successfully!");
-      setSelectedMovie("");
+      alert(`${isMovie ? "Movie" : "Music"} updated successfully!`);
+      setSelectedContent("");
       resetForm();
     } catch (error) {
-      console.error("Error updating movie:", error);
-      alert("Failed to update movie.");
+      console.error(`Error updating ${isMovie ? "movie" : "music"}:`, error);
+      alert(`Failed to update ${isMovie ? "movie" : "music"}.`);
     } finally {
       setLoading(false);
     }
@@ -99,30 +86,41 @@ function EditMovie({ movies }) {
     setNewTitle("");
     setNewCategory("");
     setNewDescription("");
-    setNewCast("");
     setNewTags("");
-    setNewReleaseYear("");
-    setNewStatus("");
-    setIsFeatured(false);
-    setIsTopPick(false);
-    setIsTrending(false);
-    setIsNewRelease(false);
     setThumbnailFile(null);
   };
 
   return (
     <div className="upload-container">
-      <h2>Edit Movie</h2>
+      <h2>{isMovie ? "Edit Movie" : "Edit Music"}</h2>
 
-      <select onChange={(e) => setSelectedMovie(e.target.value)} value={selectedMovie}>
-        <option value="">Select a movie</option>
-        {movies.map((movie) => (
-          <option key={movie.id} value={movie.id}>
-            {movie.title}
+      {/* Buttons to switch between Edit Movie and Edit Music */}
+      <div className="button-group">
+        <button
+          onClick={() => setIsMovie(true)}
+          className={isMovie ? "active" : ""}
+        >
+          Edit Movie
+        </button>
+        <button
+          onClick={() => setIsMovie(false)}
+          className={!isMovie ? "active" : ""}
+        >
+          Edit Music
+        </button>
+      </div>
+
+      {/* Dropdown to select content to edit */}
+      <select onChange={(e) => setSelectedContent(e.target.value)} value={selectedContent}>
+        <option value="">Select a {isMovie ? "movie" : "music"}</option>
+        {(isMovie ? movies : music).map((content) => (
+          <option key={content.id} value={content.id}>
+            {content.title}
           </option>
         ))}
       </select>
 
+      {/* Input fields for content details */}
       <div className="input-group">
         <input
           type="text"
@@ -157,79 +155,12 @@ function EditMovie({ movies }) {
 
       <div className="input-group">
         <textarea
-          placeholder="New Cast (comma separated)"
-          value={newCast}
-          onChange={(e) => setNewCast(e.target.value)}
-          disabled={loading}
-          className="textarea-field"
-        />
-      </div>
-
-      <div className="input-group">
-        <textarea
           placeholder="New Tags (comma separated)"
           value={newTags}
           onChange={(e) => setNewTags(e.target.value)}
           disabled={loading}
           className="textarea-field"
         />
-      </div>
-
-      <div className="input-group">
-        <input
-          type="text"
-          placeholder="New Release Year"
-          value={newReleaseYear}
-          onChange={(e) => setNewReleaseYear(e.target.value)}
-          disabled={loading}
-          className="input-field"
-        />
-      </div>
-
-      <div className="input-group">
-        <input
-          type="text"
-          placeholder="New Status"
-          value={newStatus}
-          onChange={(e) => setNewStatus(e.target.value)}
-          disabled={loading}
-          className="input-field"
-        />
-      </div>
-
-      <div className="checkbox-group">
-        <label>
-          <input
-            type="checkbox"
-            checked={isFeatured}
-            onChange={() => setIsFeatured(!isFeatured)}
-            disabled={loading}
-          /> Featured
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={isTopPick}
-            onChange={() => setIsTopPick(!isTopPick)}
-            disabled={loading}
-          /> Top Pick
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={isTrending}
-            onChange={() => setIsTrending(!isTrending)}
-            disabled={loading}
-          /> Trending
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={isNewRelease}
-            onChange={() => setIsNewRelease(!isNewRelease)}
-            disabled={loading}
-          /> New Release
-        </label>
       </div>
 
       <div className="input-group">
@@ -244,12 +175,12 @@ function EditMovie({ movies }) {
 
       {loading && <div className="progress-bar"><div className="progress"></div></div>}
 
-      <button 
+      <button
         className="submit-btn"
-        onClick={handleUpdate} 
-        disabled={loading || !newTitle || !newCategory || !newDescription || !selectedMovie}
+        onClick={handleUpdate}
+        disabled={loading || !newTitle || !newCategory || !newDescription || !selectedContent}
       >
-        {loading ? "Updating..." : "Update Movie"}
+        {loading ? "Updating..." : `Update ${isMovie ? "Movie" : "Music"}`}
       </button>
 
       <style>
@@ -273,10 +204,17 @@ function EditMovie({ movies }) {
             0% { transform: translateX(-100%); }
             100% { transform: translateX(100%); }
           }
+
+          .button-group button.active {
+            background-color: #4CAF50;
+            color: white;
+            margin-right: 10px;
+          }
+          
         `}
       </style>
     </div>
   );
 }
 
-export default EditMovie;
+export default EditContent;
