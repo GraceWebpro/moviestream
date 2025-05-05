@@ -2,30 +2,34 @@ import '../styles/Main.css';
 
 const Footer = () => {
   return (
-    <footer className="footer">
-      <div className="footer-container">
-        <div className="footer-left">
-          <p>© 2025 Movie Stream</p>
-          <p>All rights reserved.</p>
-        </div>
-        
-        <div className="footer-center">
-          <a href="/">Home</a>
-          <a href="/movies">Movies</a>
-          <a href="/contact">Contact</a>
-          <a href="/privacy">Privacy</a>
-        </div>
-        
-        <div className="footer-right">
-          <p>Follow us:</p>
-          <div className="social-icons">
-            <a href="#"><i className="fab fa-facebook"></i></a>
-            <a href="#"><i className="fab fa-twitter"></i></a>
-            <a href="#"><i className="fab fa-instagram"></i></a>
-          </div>
-        </div>
-      </div>
-    </footer>
+    <footer class="site-footer">
+  <div class="footer-container">
+    <div class="footer-brand">
+      <h2>PlayBox</h2>
+      <p>© 2025 GraceTech</p>
+      <p>Your Box of Nonstop Entertainment.</p>
+    </div>
+
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/services">Services</a>
+      <a href="/contact">Contact</a>
+    </div>
+
+    <div class="footer-social">
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 PlayBox. All rights reserved.</p>
+  </div>
+</footer>
+
   );
 };
 

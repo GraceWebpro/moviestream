@@ -16,6 +16,14 @@
   }
   
 
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  
 body {
   background-color: var(--background-color);
   color: var(--text-color);
@@ -23,6 +31,7 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  
 }
 
 /* Nasvbar CSS starts here */
@@ -95,7 +104,7 @@ body {
   }
   
   .nav-links a:hover {
-    color: #ff5722;
+    color: var(--accent-color);
   }
   
   /* Theme Toggle Button */
@@ -317,6 +326,9 @@ body {
     transition: background-color 0.3s;
   }
   
+  .movies-btn {
+    background-color: #d73d05;
+  }
   .cta-btn:hover {
     background-color: #e64a19;
   }
@@ -961,11 +973,11 @@ body {
 }
 */
 .subscribe-section {
-  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
   padding: 60px 20px;
   background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
-  background-size: 400% 400%;
-  animation: gradientMove 15s ease infinite;
+  background-size: 200% 200%;
   color: #ffffff;
   display: flex;
   flex-direction: column;
@@ -1058,22 +1070,32 @@ body {
 
 /* Mobile Responsive */
 @media (max-width: 600px) {
+  
   .subscribe-section h2 {
-    font-size: 2rem;
-  }
-
-  .subscribe-section form {
-    flex-direction: column;
-  }
-
-  .subscribe-section input {
-    width: 100%;
-    max-width: 100%;
+    font-size: 1.8rem;
   }
 
   .subscribe-section button {
     width: 100%;
   }
+
+  .subscribe-section input, .subscribe-section button {
+    padding: 10px 16px;
+
+  }
+/*
+  .subscribe-section form {
+    flex-direction: column;
+  }
+
+  .subscribe-section input {
+    width: 80%;
+    max-width: 80%;
+  }
+
+  .subscribe-section button {
+    width: 100%;
+  }*/
 }
 
 /* subscription ends here */
@@ -1543,39 +1565,80 @@ button:hover {
 }
 
 
+.site-footer {
+  background-color: #111;
+  color: #fff;
+  padding: 40px 20px 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
 .footer-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
+  gap: 30px;
   max-width: 1200px;
-  margin: auto;
+  margin: 0 auto;
 }
 
-.footer-left,
-.footer-center,
-.footer-right {
-  margin: 10px;
+.footer-brand h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
 }
 
-.footer-center a {
-  margin: 0 10px;
-  color: #aaa;
+.footer-brand p {
+  font-size: 0.95rem;
+  color: #bbb;
+  max-width: 300px;
+}
+
+.footer-links,
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a,
+.footer-social a {
+  color: #ccc;
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.footer-center a:hover {
-  text-decoration: underline;
+.footer-links a:hover,
+.footer-social a:hover {
+  color: #e50914;
 }
 
-.social-icons a {
-  margin: 0 8px;
-  color: #aaa;
-  font-size: 18px;
+.footer-social a i {
+  font-size: 1.2rem;
 }
 
-.social-icons a:hover {
-  color: #fff;
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  font-size: 0.9rem;
+  color: #888;
+  border-top: 1px solid #333;
+  margin-top: 30px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-links,
+  .footer-social {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
 }
 
 
@@ -1613,7 +1676,7 @@ button:hover {
 }
 
 .contact-button:hover {
-  background-color: #0056b3; /* darker shade on hover */
+  background-color: #d73d05; /* darker shade on hover */
 }
 
 .search-bar .searchh-btn {

@@ -38,10 +38,12 @@ const Navbar = () => {
   return (
     <nav className={isDarkMode ? 'navbar' : 'navbar'}>
       <div className="navbar-container">
+      <Link to='/' style={{ color: 'white', textDecoration: 'none' }}>
         <div className="logo">
           <img src={logo} alt='PlayBox' width={40} height={40}/>
           <span>PlayBox</span>
         </div>
+        </Link>
 
         {/* Navigation links */}
         <div className={`nav-links ${isMobileMenuOpen ? 'active' : ''}`}>

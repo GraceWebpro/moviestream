@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import photo1 from '../../../assets/leftbg2.png'; // Make sure this path is correct based on your folder structure
 import './HeroCarousel.css'; // Import the CSS file
 
 const items = [
@@ -21,7 +20,7 @@ const items = [
   {
     title: "Dive Into The Vibe",
     subtitle: "Experience music the way it was meant to be heard.",
-    heroBg: "/images/edm.jpg",
+    heroBg: "/images/bg4.jpg",
   },
 ];
 
@@ -43,15 +42,13 @@ const HeroCarousel = () => {
       {/* Overlay */}
       <div className="hero-overlay">
         {/* Left: Static Slanted Image */}
-        <div className="slanted-image-container">
-          <img alt='image' src={photo1} className="slanted-image" />
-        </div>
+        
 
         {/* Right: Main Content */}
         <div style={{
         background: 'rgba(255, 255, 255, 0.1)',
         backdropFilter: 'blur(10px)',
-        padding: '3rem 2rem',
+        padding: '2rem 2rem',
         borderRadius: '16px',
         maxWidth: '550px',
         textAlign: 'center',
