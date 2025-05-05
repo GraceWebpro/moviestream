@@ -1626,6 +1626,7 @@ button:hover {
   height: 100px;
   display: block;
   margin: 0 auto; /* Center the logo */
+  margin-top: -40px;
 }
 
 .btn-primary, .btn-secondary {
@@ -1707,5 +1708,48 @@ body.flashpage-active .footer {
 }
 
 
+@media (max-width: 768px) {
+  .flashpage-container {
+    padding: 1.5rem 1rem;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
+  .button-container {
+    gap: 15px;
+    
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    font-size: 0.9rem;
+    padding: 12px 30px;
+
+  }
+/*
+  .btn-primary,
+  .btn-secondary {
+    width: 90%;
+    max-width: 320px;
+    font-size: 1rem;
+    padding: 0.9rem 1.2rem;
+  }*/
+
+  .flash-logo-icon {
+    width: 80px; /* Reduce for mobile */
+    height: 80px;
+    margin-bottom: 1rem;
+  }
+
+  .headline {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .subheadline {
+    font-size: 1.0rem;
+    margin-bottom: 30px;
+  }
+}
 
