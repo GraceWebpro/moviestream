@@ -36,7 +36,7 @@ const Navbar = () => {
   const navItems = isMoviePage ? movieNavItems : isMusicPage ? musicNavItems : [];
 
   return (
-    <nav className={isDarkMode ? 'navbar dark' : 'navbar light'}>
+    <nav className={isDarkMode ? 'navbar' : 'navbar'}>
       <div className="navbar-container">
         <div className="logo">
           <img src={logo} alt='PlayBox' width={40} height={40}/>
@@ -56,8 +56,8 @@ const Navbar = () => {
             </Link>
           ))}
           
-          <button className="theme-toggle" onClick={toggleTheme}>
-            {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+          <button className="theme-toggle">
+            Contact Us
           </button>
         </div>
 
