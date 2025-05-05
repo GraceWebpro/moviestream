@@ -131,7 +131,7 @@ const UploadContent = () => {
     const selectedMovie = movies.find(m => m.id === movieId);
     const movieTitle = selectedMovie?.title?.replace(/\s+/g, '.').toLowerCase() || 'movie';
     const paddedEpisode = episodeNumber.toString().padStart(2, '0');
-    const customFileName = `${movieTitle}-episode-${paddedEpisode}-(PlayBox).mp4`;
+    const customFileName = `${movieTitle}-${paddedEpisode}-(PlayBox).mp4`;
     const renamedFile = new File([file], customFileName, { type: file.type });
 
     const videoRef = ref(storage, `videos/${customFileName}`);
@@ -277,15 +277,7 @@ const UploadContent = () => {
                 required
               />
             </label>
-            <label>
-              Category:
-              <input
-                type="text"
-                value={category}
-                onChange={(e) => setCategory(e.target.value)}
-                required
-              />
-            </label>
+        
             {/* Genre Dropdown */}
             <select value={category} onChange={(e) => setCategory(e.target.value)}>
               <option value="">Select Category</option>
@@ -312,6 +304,42 @@ const UploadContent = () => {
                 onChange={(e) => setCast(e.target.value)}
                 required
               />
+            </label>
+            <label>
+            Featured:
+              <input
+                type="checkbox"
+                checked={isFeatured}
+                onChange={(e) => setIsFeatured(e.target.checked)}
+              />
+              Mark as Featured
+            </label>
+            <label>
+              Top Pick:
+            <input
+              type="checkbox"
+              checked={isTopPick}
+              onChange={(e) => setIsTopPick(e.target.checked)}
+            />
+            Mark as Top Pick
+          </label>
+          <label>
+              Trending:
+              <input
+                type="checkbox"
+                checked={isTrending}
+                onChange={(e) => setIsTrending(e.target.checked)}
+              />
+              Mark as Trending
+            </label>
+            <label>
+              New Release:
+              <input
+                type="checkbox"
+                checked={isNewRelease}
+                onChange={(e) => setIsNewRelease(e.target.checked)}
+              />
+              Mark as New Release
             </label>
             <label>
               Status:

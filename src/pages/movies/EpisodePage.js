@@ -27,7 +27,7 @@ const EpisodePage = () => {
     }
 
     const fileExtension = getFileExtension(videoUrl);
-    const fileName = `${title}-Episode-${paddedEpisode}(${siteName})${fileExtension}`;
+    const fileName = `${title}-${paddedEpisode}(${siteName})${fileExtension}`;
 
     const anchor = document.createElement('a');
     anchor.href = videoUrl;
