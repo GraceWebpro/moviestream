@@ -1059,7 +1059,7 @@ body {
 /* subscription ends here */
 
 /* movie page css starts here */
-.movies-page {
+.movies-page, .music-page {
   padding: 20px;
 }
 
