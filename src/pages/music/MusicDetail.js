@@ -31,21 +31,22 @@ const MusicDetails = () => {
     fetchMusic();
   }, [id]);
 
-  const handleDownload = () => {
-    // Check if musicUrl is valid
+  const handleDownload = async () => {
     if (!music.musicUrl) {
       alert("Invalid file URL.");
       return;
     }
-
-    // Create an anchor tag for downloading the file
-    const link = document.createElement("a");
-    link.href = music.musicUrl;
-    link.download = `${music.title}.mp3`; // Set the file name for download
-
-    // Programmatically click the link to trigger the download
-    link.click();
+  
+    try {
+      const response = await fetch(music.musicUrl);
+      const blob = await response.blob();
+      saveAs(blob, `${music.title}.mp3`);
+    } catch (error) {
+      console.error("Download failed:", error);
+      alert("Failed to download the file.");
+    }
   };
+  
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;

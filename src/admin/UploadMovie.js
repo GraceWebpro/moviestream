@@ -286,6 +286,17 @@ const UploadContent = () => {
                 required
               />
             </label>
+            {/* Genre Dropdown */}
+            <select value={category} onChange={(e) => setCategory(e.target.value)}>
+              <option value="">Select Category</option>
+              <option value="Rock">K drama</option>
+              <option value="Gospel">Nollywood</option>
+              <option value="Pop">Bollywood</option>
+              <option value="Hip Hop">Hollywood</option>
+              <option value="Jazz">Chinese Cinema</option>
+              <option value="Afrobeats">French Cinema</option>
+              {/* Add more as needed */}
+            </select>
             <label>
               Tags:
               <textarea
@@ -473,15 +484,16 @@ const UploadContent = () => {
       .mode-toggle {
         display: flex;
         justify-content: center;
-        gap: 15px;  /* Space between buttons */
+        gap: 10px;  /* Space between buttons */
         margin-bottom: 20px;
+        margin-left: 10px;
       }
       
       .mode-toggle button {
         background-color: #007bff;
         color: #fff;
         padding: 10px 20px;
-        font-size: 16px;
+        font-size: 14px;
         cursor: pointer;
         border-radius: 5px;
         transition: all 0.3s ease;
