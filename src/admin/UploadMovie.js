@@ -84,10 +84,20 @@ const UploadContent = () => {
     }, async () => {
       const thumbnailURL = await getDownloadURL(thumbnailRef);
 
+      // ✅ Create slug from title
+    const slug = title
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9\s-]/g, '')       // remove special characters
+      .replace(/\s+/g, '-')               // replace spaces with hyphens
+      .replace(/-+/g, '-');               // remove multiple hyphens
+
+
       try {
         const movieCollectionRef = collection(db, 'movies');
         await addDoc(movieCollectionRef, {
           title,
+          slug,
           description,
           releaseYear,
           status,
@@ -131,7 +141,7 @@ const UploadContent = () => {
     const selectedMovie = movies.find(m => m.id === movieId);
     const movieTitle = selectedMovie?.title?.replace(/\s+/g, '.').toLowerCase() || 'movie';
     const paddedEpisode = episodeNumber.toString().padStart(2, '0');
-    const customFileName = `${movieTitle}-${paddedEpisode}-(PlayBox).mp4`;
+    const customFileName = `${movieTitle}${paddedEpisode}-(PlayBox).mp4`;
     const renamedFile = new File([file], customFileName, { type: file.type });
 
     const videoRef = ref(storage, `videos/${customFileName}`);

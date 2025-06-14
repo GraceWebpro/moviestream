@@ -18,6 +18,12 @@ import FlashPage from "./pages/flashScreen/FlashPage";
 import MusicHomepage from "./pages/home/music/MusicHomepage";
 import MusicPage from "./pages/music/MusicPage";
 import MusicDetails from "./pages/music/MusicDetail";
+import TermsAndConditions from "./pages/legal/Terms";
+import PrivacyPolicy from "./pages/legal/Privacy";
+import Disclaimer from "./pages/legal/Disclaimer";
+import NotFound from "./pages/NotFound";
+import Blog from "./pages/blog/Blog";
+import BlogPost from "./pages/blog/BlogDetail";
 //import EpisodeDownload from "./pages/movies/EpisodeDownload";
 
 function App() {
@@ -42,12 +48,14 @@ function App() {
           <Route path="/movies" element={<MoviesPage />} />
           <Route path="/songs" element={<MusicPage />} />
           <Route path="/about" element={<About />} />
-          <Route path="/movie/:id" element={<MovieDetails />} />
+          <Route path="/movies/:slug" element={<MovieDetails />} />
           <Route path="/music/:id" element={<MusicDetails />} />
 
           {/*<Route path="/movie/:movieId/episode/:episodeNumber" component={EpisodePage} />*/}
-          <Route path="/movie/:title/:episodeNumber" element={<EpisodePage />} />
+          <Route path="/movie/:slug/:episodeNumber" element={<EpisodePage />} />
           <Route path='/how-to-download' element={<HowTo />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:id" element={<BlogPost />} />
 
           {/* Admin Routes */}
           <Route path='/admin/login' element={<AdminLogin onUserChange={setUser} />} />   
@@ -56,10 +64,15 @@ function App() {
           
           {/* Protected Admin Dashboard */}
           <Route path="/admin/dashboard" element={<ProtectedRoute component={AdminDashboard} />} />
+          <Route path="/terms" element={<TermsAndConditions />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
+          <Route path="/disclaimer" element={<Disclaimer />} />
+
 
           
-          {/* Redirect to home for unmatched routes */}
-          <Route path="*" element={<Navigate to="/" />} />
+          {/* Redirect to home for unmatched routes *
+          <Route path="*" element={<Navigate to="/" />} />*/}
+          <Route path="*" element={<NotFound />} />
 
         </Routes>
         {!isFlashPage && !isAdminPage && <Footer />}

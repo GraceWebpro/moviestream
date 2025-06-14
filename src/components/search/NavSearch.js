@@ -3,7 +3,7 @@ import SearchBar from '../home/search/SearchBar';
 import { fetchMovies } from '../home/search/FetchMovies'; // Adjust the import based on your setup
 import "./Search.css"
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 
 
 const NavSearch = () => {
@@ -40,7 +40,7 @@ const NavSearch = () => {
   };
 
   const handleMovieClick = (movieId) => {
-    navigate(`movies/${movieId}`);
+    navigate(`movie/${movieId}`);
   };
 
 
@@ -58,10 +58,8 @@ const NavSearch = () => {
               onClick={() => handleMovieClick(movie.id)} 
               style={{ color: '#fff', marginLeft: '0px', cursor: 'pointer' }}
             >
-            <Link to={`/movie/${movie.id}`} style={{ color: '#fff', textDecoration: 'none' }}>
 
               {movie.title}
-              </Link>
             </li>
             
           ))}

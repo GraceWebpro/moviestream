@@ -1,11 +1,25 @@
+import { Helmet } from 'react-helmet';
 import '../../styles/About.css'; // optional: if you want to style separately
 
 const About = () => {
   return (
     <div className="about-container">
+      {/* 🔗 SEO Metadata */}
+      <Helmet>
+        <title>About | PlayBox – Discover & Download Movies</title>
+        <meta
+          name="description"
+          content="Learn more about PlayBox – your go-to platform for discovering, streaming, and downloading high-quality movies across genres. Enjoy a smooth and safe movie experience."
+        />
+        <meta
+          name="keywords"
+          content="about PlayBox, movie downloads, PlayBox movies, PlayBox info, safe movie streaming"
+        />
+      </Helmet>
+
       <h1>About Us</h1>
-      <p className="about-intro">
-        Welcome to <strong>Movie Stream</strong> – your ultimate destination for discovering and downloading movies effortlessly!
+      <p className="about-intro" style={{ textAlign: 'left' }}>
+        Welcome to <strong>PlayBox</strong> – your ultimate destination for discovering and downloading movies effortlessly!
       </p>
 
       <section className="about-section">
@@ -35,7 +49,7 @@ const About = () => {
       </section>
 
       <p className="about-thankyou">
-        Thank you for choosing <strong>My Movie Website</strong> – your movie journey starts here!
+        Thank you for choosing <strong>PlayBox</strong> – your movie journey starts here!
       </p>
     </div>
   );

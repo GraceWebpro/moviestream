@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig";
 import { saveAs } from "file-saver";
+import { Helmet } from "react-helmet";
+
 
 const MusicDetails = () => {
   const { id } = useParams();
@@ -53,7 +55,19 @@ const MusicDetails = () => {
   if (!music) return null;
 
   return (
+    <>
+      <Helmet>
+        <title>{`${music.title} by ${music.artist} | Download & Listen`}</title>
+        <meta
+          name="description"
+          content={`Listen and download ${music.title} by ${music.artist}. Genre: ${music.genre}, Released: ${music.releaseYear}.`}
+        />
+        <meta name="keywords" content={`${music.title}, ${music.artist}, ${music.genre}, music download, stream music at PlayBox`} />
+      </Helmet>
     <div className="music-details-container">
+
+    
+
         <h1>{music.title}</h1>
       <div className="music-cover">
         <img src={music.coverImageUrl} alt={music.title} />
@@ -117,6 +131,7 @@ const MusicDetails = () => {
         `}
       </style>
     </div>
+    </>
   );
 };
 

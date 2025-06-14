@@ -48,15 +48,4 @@
 .search-btn:hover {
     background-color: #cccccc;
 }
-/*
-@media (max-width: 600px) {
-    .search-bar {
-        flex-direction: column;
-    }
 
-    .search-btn {
-        margin-left: 0;
-        margin-top: 10px;
-        width: 100%;
-    }
-}*/

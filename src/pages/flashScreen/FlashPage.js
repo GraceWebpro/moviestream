@@ -1,15 +1,26 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/logo.png'
-
-import '../../styles/Main.css'; // Make sure to create this CSS file for the styles
+import { Helmet } from 'react-helmet';
+import logo from '../../assets/logo.png';
+import '../../styles/Main.css';
 
 const FlashPage = () => {
-
   return (
     <div className="flashpage-container">
+      {/* 🔗 SEO Metadata */}
+      <Helmet>
+        <title>PlayBox | Stream Movies & Music Instantly</title>
+        <meta
+          name="description"
+          content="Welcome to PlayBox – your one-stop hub for movies and music. Instantly stream, discover, and enjoy entertainment on any device."
+        />
+        <meta
+          name="keywords"
+          content="movies, music, download, streaming, PlayBox, entertainment, free movies, free music"
+        />
+      </Helmet>
+
       <div className="flashpage-content">
-        {/* Logo Container with Gradient Border */}
         <div className="flash-logo-container">
           <div className="flash-logo-border">
             <img src={logo} alt="PlayBox" className="flash-logo-icon" />
@@ -22,9 +33,8 @@ const FlashPage = () => {
         </div>
 
         <div className="button-container">
-          {/* Use Link component to navigate to different routes */}
           <Link to="/movie-homepage">
-            <button className="btn-primary">Movies</button>
+            <button className="btn-primary"><span>Movies</span></button>
           </Link>
           <Link to="/music-homepage">
             <button className="btn-secondary">Music</button>

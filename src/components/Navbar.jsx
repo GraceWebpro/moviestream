@@ -21,7 +21,8 @@ const Navbar = () => {
   const movieNavItems = [
     { name: "Home", path: "/movie-homepage" },
     { name: "Movies", path: "/movies" },
-    { name: "About", path: "/about" }
+    { name: "About", path: "/about" },
+    { name: "Blog", path: "/blog" }
   ];
 
   const musicNavItems = [
@@ -29,14 +30,20 @@ const Navbar = () => {
     { name: "Songs", path: "/songs" },
     { name: "Albums", path: "/albums" },
     { name: "Dj Mix", path: "/dj-mix" },
-    { name: "Artists", path: "/artists" }
+    { name: "About", path: "/about" },
+    { name: "Blog", path: "/blog" }
   ];
 
   // Choose the correct nav items based on the current section (Movie or Music)
   const navItems = isMoviePage ? movieNavItems : isMusicPage ? musicNavItems : [];
 
   return (
-    <nav className={isDarkMode ? 'navbar' : 'navbar'}>
+    <nav style={{ 
+      position: 'fixed', 
+      top: 0, 
+      background: '#121212', 
+      zIndex: 1000 
+    }} className={isDarkMode ? 'navbar' : 'navbar'}>
       <div className="navbar-container">
       <Link to='/' style={{ color: 'white', textDecoration: 'none' }}>
         <div className="logo">

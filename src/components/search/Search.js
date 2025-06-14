@@ -29,6 +29,7 @@ const Search = () => {
         setNoResults(true);
       } else {
         setMovies(results);
+        navigate('/search-results', { state: { results, query } });
       }
     } catch (error) {
       console.error("Error fetching movies:", error);

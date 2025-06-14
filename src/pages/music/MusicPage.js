@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { db } from "../../firebase/firebaseConfig";
 import { collection, query, where, getDocs } from "firebase/firestore";
+import { Helmet } from "react-helmet";
 import "../../styles/Main.css";
 
 const genres = [
@@ -82,7 +83,20 @@ const MusicPage = () => {
   });
 
   return (
-    <div className="music-page">
+    <>
+      <Helmet>
+      <title>Explore Music | Stream & Download Top Tracks | PlayBox</title>
+      <meta
+        name="description"
+        content="Discover and stream trending music across genres like Afrobeat, Hip-Hop, Pop, Jazz, and more at PlayBox. Filter by genre and explore popular or new tracks."
+      />
+      <meta
+        name="keywords"
+        content="music streaming, PlayBox, download music, afrobeat, hip-hop, pop, jazz, trending tracks, music genres"
+      />
+    </Helmet>
+        <div className="music-page">
+
       <div className="movie-hero-section">
         <div className="movie-hero-content">
           <h1>Discover Music</h1>
@@ -161,6 +175,7 @@ const MusicPage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

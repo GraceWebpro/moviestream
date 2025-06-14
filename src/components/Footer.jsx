@@ -1,4 +1,6 @@
+import { Link } from 'react-router-dom'; 
 import '../styles/Main.css';
+
 
 const Footer = () => {
   return (
@@ -7,7 +9,7 @@ const Footer = () => {
     <div class="footer-brand">
       <h2>PlayBox</h2>
       <p>© 2025 GraceTech</p>
-      <p>Your Box of Nonstop Entertainment.</p>
+      <p>Your one-stop hub for movies and music.</p>
     </div>
 
     <div class="footer-links">
@@ -24,6 +26,21 @@ const Footer = () => {
       <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
     </div>
   </div>
+  <div
+  style={{
+    display: 'flex',
+    gap: '20px',
+    color: '#fff',
+    justifyContent: 'center', // centers horizontally
+    alignItems: 'center',     // centers vertically (if parent has height)
+    textAlign: 'center',      // optional, for text alignment
+  }}
+>  
+  <Link to="/terms" style={{ color: '#ccc', textDecoration: 'none', fontSize: '0.8rem' }}>Terms & Conditions</Link>
+  <Link to="/privacy" style={{ color: '#ccc', textDecoration: 'none', fontSize: '0.8rem' }}>Privacy Policy</Link>
+  <Link to="/disclaimer" style={{ color: '#ccc', textDecoration: 'none', fontSize: '0.8rem' }}>Disclaimer</Link>
+</div>
+
 
   <div class="footer-bottom">
     <p>&copy; 2025 PlayBox. All rights reserved.</p>

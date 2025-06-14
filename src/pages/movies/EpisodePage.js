@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { FaDownload } from 'react-icons/fa';
+import { Helmet } from 'react-helmet';
 
 const EpisodePage = () => {
   const { title, episodeNumber } = useParams();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const videoUrl = queryParams.get('videoUrl');
+
+    // Sample URLs from query params (pass them like: ?url480=...&url720=... etc.)
+  const videoUrls = {
+    '480p': queryParams.get('url480'),
+    '720p': queryParams.get('url720'),
+    '1080p': queryParams.get('url1080'),
+  };
+  
   const thumbnailUrl = queryParams.get('thumbnailUrl'); // ✅ get thumbnail from URL
 
   const [loading, setLoading] = useState(false);
@@ -38,8 +47,23 @@ const EpisodePage = () => {
   };
 
   return (
-    <div style={{ padding: '2rem', maxWidth: '800px', margin: 'auto', textAlign: 'center' }}>
-      <h2>{title} - Episode {paddedEpisode}</h2>
+    <>
+          <Helmet>
+              <title>Download Movie Episode | PlayBox</title>
+              <meta
+                name="description"
+                content="Download the latest movie episode directly from PlayBox. Fast and easy download steps for your favorite shows and series."
+              />
+              <meta
+                name="keywords"
+                content="download movie episode, movie download link, PlayBox download, episode video download"
+              />
+            </Helmet>
+
+<div style={{ padding: '2rem', maxWidth: '800px', margin: 'auto', textAlign: 'center' }}>
+
+      
+      <h2 className='ep-page-title'>{title} - Episode {paddedEpisode}</h2>
 
       {thumbnailUrl ? (
         
@@ -83,6 +107,7 @@ const EpisodePage = () => {
         </button>
       </div>
     </div>
+    </>
   );
 };
 

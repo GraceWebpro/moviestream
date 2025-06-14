@@ -7,6 +7,11 @@ import { Link } from 'react-router-dom';
 const FeaturedMovies = ({ movie }) => {
     const { movies, loading, error } = useFetchMovies();
 
+    // 🔧 Slugify function
+  const slugify = (title) =>
+  title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+
+
     if (loading) return <p>Loading featured movies...</p>;
     if (error) return <p>Failed to load movies.</p>;
     console.log('All Movies:', movies);
@@ -34,8 +39,8 @@ const FeaturedMovies = ({ movie }) => {
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="movie-card"
     >
-      <Link to={`/movie/${movie.id}`}> {/* Fix: use movie.id, not mainFeatured.id */}
-        <img 
+      {/* ✅ Use slugified title here */}
+      <Link to={`/movies/${slugify(movie.title)}`}>        <img 
           src={movie.thumbnailUrl} 
           alt={movie.title} 
           className="movie-thumbnail"

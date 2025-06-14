@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase/firebaseConfig'; // Import from the updated firebase setup
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { doc, collection, getDoc, getDocs, query, orderBy } from 'firebase/firestore';
+import { doc, collection, getDoc, getDocs, query, where, orderBy } from 'firebase/firestore';
 import Image from '../../assets/Dramakey-ad.jpeg';
 import { ref, getStorage, getDownloadURL } from 'firebase/storage';
 import CommentSection from '../../components/comment/Comment';
@@ -12,11 +12,13 @@ import { fetchSimilarMovies } from './SimilarMovoie';
 import { IoIosArrowForward } from 'react-icons/io';
 import '../../styles/Main.css'
 import { motion } from 'framer-motion'; // for animations
+import { Helmet } from 'react-helmet';
+
 
 
 
 const MovieDetail = () => {
-  const { id } = useParams(); // Get the movie ID from the URL
+  const { slug } = useParams(); // Get the movie ID from the URL
   const [movie, setMovie] = useState(null);
   const [episodes, setEpisodes] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -40,25 +42,28 @@ const MovieDetail = () => {
   useEffect(() => {
     const fetchMovie = async () => {
       try {
-        console.log("Fetching movie with ID:", id); // Log the ID
-        const movieDoc = doc(db, 'movies', id); // Create a reference to the document
-        const docSnapshot = await getDoc(movieDoc); // Fetch the document
+        console.log("Fetching movie with ID:", slug); // Log the ID
+
+        const q = query(collection(db, 'movies'), where('slug', '==', slug));
+        const querySnapshot = await getDocs(q);
         
-        if (docSnapshot.exists()) {
+        if (!querySnapshot.empty) {
+          const docSnapshot = querySnapshot.docs[0];
           const movieData = docSnapshot.data();
-          setMovie(movieData);
-
-          const movies = await fetchSimilarMovies(movieData.tags, id);
-          setSimilarMovies(movies);
-
-          const episodesRef = collection(movieDoc, 'episodes');
-          const q = query(episodesRef, orderBy('episodeNumber', 'asc'));
-          const episodesSnapshot = await getDocs(q);
+          const movieId = docSnapshot.id;
+          setMovie({ ...movieData, id: movieId });
+        
+          const episodesRef = collection(db, 'movies', movieId, 'episodes');
+          const qEpisodes = query(episodesRef, orderBy('episodeNumber', 'asc'));
+          const episodesSnapshot = await getDocs(qEpisodes);
           const episodeList = episodesSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
           setEpisodes(episodeList);
+        
+          const similar = await fetchSimilarMovies(movieData.tags, movieId);
+          setSimilarMovies(similar);
         } else {
-          console.error("No such document!");
-          setMovie(null); // Explicitly set movie to null if not found
+          console.error("No movie found with that slug.");
+          setMovie(null);
         }
       } catch (error) {
         console.error("Error fetching movie: ", error);
@@ -69,7 +74,7 @@ const MovieDetail = () => {
     };
 
     fetchMovie();
-  }, [id]);
+  }, [slug]);
 
   const downloadEpisode = async (episodeNumber) => {
     try {
@@ -97,7 +102,15 @@ const tags = movie.tags || [];
 
 
   return (
-    <div className='center' style={{ paddingLeft: '0px', paddingRight: '0px'}}>
+    <>
+      <Helmet>
+        <title>{movie.title} - Watch & Download | PlayBox</title>
+        <meta name="description" content={`Watch and download ${movie.title}, a ${movie.category} movie released in ${movie.releaseYear}.`} />
+        <meta name="keywords" content={`download ${movie.title}, ${movie.category}, ${movie.tags?.join(', ')}`} />
+      </Helmet>
+
+<div className='center' style={{ paddingLeft: '0px', paddingRight: '0px'}}>
+
       
       <div className="movie-hero-section">
         <div className="movie-hero-content">
@@ -111,7 +124,11 @@ const tags = movie.tags || [];
       <div className='mov-det-flex'>
         <div className='detail-left'>
           <div className='content'>
-
+          <Helmet>
+  <title>{movie.title} - Watch & Download | MovieStream</title>
+  <meta name="description" content={`Watch and download ${movie.title}, a ${movie.category} movie released in ${movie.releaseYear}.`} />
+  <meta name="keywords" content={`download ${movie.title}, ${movie.category}, ${movie.tags?.join(', ')}`} />
+</Helmet>
             <p className='p-title'>Download Korean {movie.title} ({movie.category})</p>
             <img src={movie.thumbnailUrl} alt={movie.title} style={{ width: '250px', height: '320px' }} />
             
@@ -162,9 +179,8 @@ const tags = movie.tags || [];
               {episodes.map((episode) => (
               <li key={episode.id}>
                   <h3>Episode {episode.episodeNumber}</h3>
-                  <Link
-                    to={`/movie/${movie.title}/${episode.episodeNumber}?videoUrl=${encodeURIComponent(episode.videoUrl)}&thumbnailUrl=${encodeURIComponent(movie.thumbnailUrl)}`}
-                  >
+                  <Link to={`/movie/${movie.slug}/${episode.episodeNumber}?videoUrl=${encodeURIComponent(episode.videoUrl)}&thumbnailUrl=${encodeURIComponent(movie.thumbnailUrl)}`}>
+
                   <button className='card-btn' style={{ marginTop: '10px' }}>Download Episode</button>
                   </Link>
               </li>
@@ -174,7 +190,7 @@ const tags = movie.tags || [];
         </div>
 
         
-          <CommentSection movieId={id}/>
+        <CommentSection movieId={movie.id} />
         
       </div>
 
@@ -192,7 +208,7 @@ const tags = movie.tags || [];
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="movie-card"
                 >
-                  <Link to={`/movie/${similarMovies.id}`}>
+                <Link to={`/movies/${movie.slug}`}>
                   <img 
                     src={movie.thumbnailUrl} 
                     alt={movie.title} 
@@ -232,6 +248,7 @@ const tags = movie.tags || [];
           </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -37,7 +37,7 @@ const NewRelease = () => {
         }}
       >
         {newReleaseMovies.map((movie) => (
-          <SwiperSlide key={movie.id}>
+          <SwiperSlide key={movie.id} style={{ color: 'var(--accent-color)'}}>
             
             <div className="movie-card">
             <Link to={`/movie/${movie.id}`}>
