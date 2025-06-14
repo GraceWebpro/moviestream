@@ -16,6 +16,7 @@ import MusicUpload from "./UploadMusic";
 import EditContent from "./EditMovie";
 import DeleteContent from "./DeleteMovie";
 import UploadContent from "./UploadMovie";
+import UploadBlog from "./UploadBlog";
 
 
 const AdminDashboard = () => {
@@ -97,6 +98,7 @@ const AdminDashboard = () => {
           <ul>
             <li onClick={() => setActiveTab("dashboard")} className={activeTab === "dashboard" ? "active" : ""}>📊 Dashboard</li>
             <li onClick={() => setActiveTab("upload")} className={activeTab === "upload" ? "active" : ""}>📤 Upload</li>
+            <li onClick={() => setActiveTab("uploadBlog")} className={activeTab === "uploadBlog" ? "active" : ""}>📤 Upload Blog</li>
 
             <li onClick={() => setActiveTab("edit")} className={activeTab === "edit" ? "active" : ""}>✏️ Edit </li>
             <li onClick={() => setActiveTab("delete")} className={activeTab === "delete" ? "active" : ""}>🗑️ Delete </li>
@@ -156,6 +158,8 @@ const AdminDashboard = () => {
         </div>
       )}
       {activeTab === "upload" && <UploadContent/>}
+      {activeTab === "uploadBlog" && <UploadBlog/>}
+
       {activeTab === "edit" && <EditContent movies={movies}/>} {/* Pass projects */}
       {activeTab === "delete" && <DeleteContent movies={movies} />} {/* Pass projects */}
       {activeTab === "analytics" && <AnalyticsPage />}

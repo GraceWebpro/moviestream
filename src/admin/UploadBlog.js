@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useRef } from 'react';
 import ReactQuill from 'react-quill';
-import { db, storage } from '../firebase';
+import { db, storage } from '../firebase/firebaseConfig';
 import {
   addDoc,
   collection,
