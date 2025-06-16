@@ -1,6 +1,5 @@
 import React from 'react'
-import HomeMovieList from './HomeMovieList'
-import Hero from './Hero';
+//import Hero from './Hero';
 import MovieGenreSlider from '../../../components/MovieGenreSlider';
 import CategoriesSection from './Categories';
 import FeaturedMovies from '../../../components/FeaturedMovie';
@@ -13,6 +12,9 @@ import HomeContact from './HomeContact';
 import Search from '../../../components/search/Search';
 import { Helmet } from 'react-helmet';
 import HomeFAQ from '../HomeFAQ';
+//import HeroSection from './Hero1';
+import HeroSection from './HeroSection';
+import HeroPoster from './HeroPoster';
 
 
 
@@ -32,7 +34,7 @@ const Home = () => {
                 />
             </Helmet>
 
-            <Hero />
+            <HeroSection />
             <MovieGenreSlider />
             <Search />
             <NewRelease />

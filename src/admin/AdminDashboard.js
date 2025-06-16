@@ -5,18 +5,12 @@ import { getDocs, collection, doc, getDoc } from "firebase/firestore";
 import { db, auth } from '../firebase/firebaseConfig'
 import UserSettings from "./UserSettings";
 import { FaBars, FaTimes } from "react-icons/fa";
-import "./Admin.css";
-import UploadMovie from "./UploadMovie";
-import UploadEpisode from "./UploadEpisode";
-import EditMovie from "./EditMovie";
-import DeleteMovie from "./DeleteMovie";
-import { Link } from "react-router-dom";
 import AnalyticsPage from "./Analytics";
-import MusicUpload from "./UploadMusic";
 import EditContent from "./EditMovie";
 import DeleteContent from "./DeleteMovie";
 import UploadContent from "./UploadMovie";
 import UploadBlog from "./UploadBlog";
+import "./Admin.css";
 
 
 const AdminDashboard = () => {
@@ -125,7 +119,7 @@ const AdminDashboard = () => {
               <tr>
               <th>ID</th>
             <th>Movie Name</th>
-            <th>Description</th>
+            <th>Slug</th>
             <th>Release Year</th>
             <th>Featured</th>
             <th>Top Pick</th>
@@ -140,7 +134,7 @@ const AdminDashboard = () => {
                             <tr key={movie.id}>
                             <td>{movie.id}</td>
                             <td>{movie.title}</td>
-                            <td>{movie.description}</td>
+                            <td>{movie.slug}</td>
                             <td>{movie.releaseYear}</td>
                             <td>{movie.isFeatured ? "Yes" : "No"}</td>
                             <td>{movie.topPick ? "Yes" : "No"}</td>

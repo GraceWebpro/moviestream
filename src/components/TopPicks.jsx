@@ -34,7 +34,7 @@ const TopPicks = () => {
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="movie-card"
     >
-      <Link to={`/movie/${movie.id}`}> {/* Fix: use movie.id, not mainFeatured.id */}
+      <Link to={`/movies/${movie.slug}`}> {/* Fix: use movie.id, not mainFeatured.id */}
         <img 
           src={movie.thumbnailUrl} 
           alt={movie.title} 

@@ -52,7 +52,7 @@ function App() {
           <Route path="/music/:id" element={<MusicDetails />} />
 
           {/*<Route path="/movie/:movieId/episode/:episodeNumber" component={EpisodePage} />*/}
-          <Route path="/movie/:slug/:episodeNumber" element={<EpisodePage />} />
+          <Route path="/movies/:slug/:episodeNumber" element={<EpisodePage />} />
           <Route path='/how-to-download' element={<HowTo />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogPost />} />

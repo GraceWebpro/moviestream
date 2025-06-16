@@ -100,6 +100,14 @@ const MovieDetail = () => {
 const cast = movie.cast || [];
 const tags = movie.tags || [];
 
+const getYouTubeId = (url) => {
+  const match = url?.match(
+    /(?:youtube\.com.*(?:\/|v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/
+  );
+  return match ? match[1] : null;
+};
+
+
 
   return (
     <>
@@ -112,7 +120,7 @@ const tags = movie.tags || [];
 <div className='center' style={{ paddingLeft: '0px', paddingRight: '0px'}}>
 
       
-      <div className="movie-hero-section">
+      <div className="movie-hero-section" style={{ marginTop: '80px'}}>
         <div className="movie-hero-content">
           <h1>Explore This Movie</h1>
           <p>Dive into the story, watch episodes, and enjoy everything this movie offers!</p>
@@ -132,6 +140,34 @@ const tags = movie.tags || [];
             <p className='p-title'>Download Korean {movie.title} ({movie.category})</p>
             <img src={movie.thumbnailUrl} alt={movie.title} style={{ width: '250px', height: '320px' }} />
             
+            {movie.trailerUrl && (
+            <div className="trailer-section" style={{ marginTop: '30px', alignSelf: 'flex-start' }}>
+              <h3>Watch Trailer</h3>
+              {getYouTubeId(movie.trailerUrl) ? (
+                <iframe
+                  width="100%"
+                  height="400"
+                  src={`https://www.youtube.com/embed/${getYouTubeId(movie.trailerUrl)}`}
+                  title="YouTube Trailer"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  style={{ borderRadius: '10px', marginTop: '10px', maxWidth: '100%' }}
+                ></iframe>
+              ) : (
+                <video
+                  width="100%"
+                  height="400"
+                  controls
+                  style={{ borderRadius: '10px', marginTop: '10px', maxWidth: '100%' }}
+                >
+                  <source src={movie.trailerUrl} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              )}
+            </div>
+          )}
+
             <div className='flex' style={{ alignSelf: 'flex-start', display: 'flex', alignSelf: 'flex-start', marginTop: '30px' }}>
               <h4>TAGS : {movie.tags.length > 0 ? tags.join(', ') : 'No tags information available'}</h4>
             </div>
@@ -142,7 +178,7 @@ const tags = movie.tags || [];
             </div>
 
             <div className='flex' style={{ alignSelf: 'flex-start', display: 'flex' }}>
-              <h3>Cast : {movie.cast.length > 0 ? cast.join(', ') : 'No cast information available'}</h3>
+              <h3>Cast :{''} <span style={{ color: 'orange' }}> {movie.cast.length > 0 ? cast.join(', ') : 'No cast information available'} </span></h3>
             </div>
 
             <div className='flex' style={{ alignSelf: 'flex-start', display: 'flex' }}>
@@ -179,7 +215,7 @@ const tags = movie.tags || [];
               {episodes.map((episode) => (
               <li key={episode.id}>
                   <h3>Episode {episode.episodeNumber}</h3>
-                  <Link to={`/movie/${movie.slug}/${episode.episodeNumber}?videoUrl=${encodeURIComponent(episode.videoUrl)}&thumbnailUrl=${encodeURIComponent(movie.thumbnailUrl)}`}>
+                  <Link to={`/movies/${movie.slug}/${episode.episodeNumber}?videoUrl=${encodeURIComponent(episode.videoUrl)}&thumbnailUrl=${encodeURIComponent(movie.thumbnailUrl)}`}>
 
                   <button className='card-btn' style={{ marginTop: '10px' }}>Download Episode</button>
                   </Link>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { db } from "../../firebase/firebaseConfig";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
 import '../../styles/Main.css';
 import { Helmet } from "react-helmet";
 
@@ -36,21 +36,28 @@ const MoviesPage = () => {
     const fetchMovies = async () => {
       setLoading(true);
       setError(null);
-
+  
       const moviesCollection = collection(db, "movies");
-      let q = query(moviesCollection);
-
+      let q = query(
+        moviesCollection,
+        orderBy("createdAt", "desc") // Order by newest first
+      );
+  
       if (selectedCategories.length > 0) {
-        q = query(q, where("tags", "array-contains-any", selectedCategories));
+        q = query(
+          moviesCollection,
+          where("tags", "array-contains-any", selectedCategories),
+          orderBy("createdAt", "desc") // Must come after `where`
+        );
       }
-
+  
       try {
         const querySnapshot = await getDocs(q);
         const movieList = querySnapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
-
+  
         setMovies(movieList);
       } catch (err) {
         console.error("Error fetching movies:", err);
@@ -59,9 +66,10 @@ const MoviesPage = () => {
         setLoading(false);
       }
     };
-
+  
     fetchMovies();
   }, [selectedCategories]);
+  
 
   const handleCategoryChange = (category) => {
     setSelectedCategories((prevSelected) => {
@@ -157,7 +165,7 @@ const MoviesPage = () => {
           ) : sortedMovies.length > 0 ? (
             sortedMovies.map((movie, index) => (
               <div key={index} className="movie-card">
-                <Link to={`/movie/${movie.id}`}>
+                <Link to={`/movies/${movie.slug}`}>
                   <img src={movie.thumbnailUrl} alt={movie.title} />
                   <div className="movie-info">
                     <h3 className="movie-title">{movie.title}</h3>

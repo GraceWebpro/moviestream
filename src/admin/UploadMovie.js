@@ -20,6 +20,9 @@ const UploadContent = () => {
   const [isTrending, setIsTrending] = useState(false);
   const [isNewRelease, setIsNewRelease] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [trailerFile, setTrailerFile] = useState('');
+  const [youtubeTrailerUrl, setYoutubeTrailerUrl] = useState('');
+
 
   // Episode upload states
   const [movieId, setMovieId] = useState('');
@@ -72,64 +75,94 @@ const UploadContent = () => {
   const handleMovieSubmit = async (e) => {
     e.preventDefault();
     if (!thumbnailFile) return;
-
+  
+    setUploadProgress(0);
+  
     const thumbnailRef = ref(storage, `thumbnails/${thumbnailFile.name}`);
     const uploadTask = uploadBytesResumable(thumbnailRef, thumbnailFile);
-
-    uploadTask.on('state_changed', (snapshot) => {
-      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      setUploadProgress(progress);
-    }, (error) => {
-      console.error('Error uploading video:', error);
-    }, async () => {
-      const thumbnailURL = await getDownloadURL(thumbnailRef);
-
-      // ✅ Create slug from title
-    const slug = title
-      .toLowerCase()
-      .trim()
-      .replace(/[^a-z0-9\s-]/g, '')       // remove special characters
-      .replace(/\s+/g, '-')               // replace spaces with hyphens
-      .replace(/-+/g, '-');               // remove multiple hyphens
-
-
-      try {
-        const movieCollectionRef = collection(db, 'movies');
-        await addDoc(movieCollectionRef, {
-          title,
-          slug,
-          description,
-          releaseYear,
-          status,
-          category,
-          tags: tags.split(',').map(name => name.trim()),
-          cast: cast.split(',').map(name => name.trim()),
-          thumbnailUrl: thumbnailURL,
-          isFeatured,
-          isTopPick,
-          isTrending,
-          isNewRelease,
-          createdAt: serverTimestamp(),
-        });
-        alert('Movie uploaded successfully!');
-        setTitle('');
-        setDescription('');
-        setCast('');
-        setTags('');
-        setCategory('');
-        setReleaseYear('');
-        setStatus('');
-        setIsFeatured(false);
-        setIsTopPick(false);
-        setIsTrending(false);
-        setIsNewRelease(false);
-        setThumbnailFile(null);
-        setUploadProgress(0);
-      } catch (error) {
-        console.error('Error saving video metadata:', error);
+  
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setUploadProgress(progress);
+      },
+      (error) => {
+        console.error('Thumbnail upload error:', error);
+      },
+      async () => {
+        const thumbnailURL = await getDownloadURL(thumbnailRef);
+  
+        // ✅ Generate slug from title
+        const slug = title
+          .toLowerCase()
+          .trim()
+          .replace(/[^a-z0-9\s-]/g, '')
+          .replace(/\s+/g, '-')
+          .replace(/-+/g, '-');
+  
+        let trailerURL = null;
+  
+        // ✅ Use trailerFile if provided
+        if (trailerFile) {
+          try {
+            const trailerRef = ref(storage, `trailers/${slug}-${trailerFile.name}`);
+            const trailerUploadTask = await uploadBytesResumable(trailerRef, trailerFile);
+            trailerURL = await getDownloadURL(trailerRef);
+          } catch (trailerErr) {
+            console.error('Trailer upload failed:', trailerErr);
+          }
+        } else if (youtubeTrailerUrl?.trim()) {
+          // ✅ Use YouTube URL if no file is uploaded
+          trailerURL = youtubeTrailerUrl.trim();
+        }
+  
+        try {
+          const movieCollectionRef = collection(db, 'movies');
+          await addDoc(movieCollectionRef, {
+            title,
+            slug,
+            description,
+            releaseYear,
+            status,
+            category,
+            tags: tags.split(',').map((t) => t.trim()),
+            cast: cast.split(',').map((c) => c.trim()),
+            thumbnailUrl: thumbnailURL,
+            trailerUrl: trailerURL || null,
+            isFeatured,
+            isTopPick,
+            isTrending,
+            isNewRelease,
+            createdAt: serverTimestamp(),
+          });
+  
+          alert('Movie uploaded successfully!');
+  
+          // ✅ Reset all form fields
+          setTitle('');
+          setDescription('');
+          setCast('');
+          setTags('');
+          setCategory('');
+          setReleaseYear('');
+          setStatus('');
+          setIsFeatured(false);
+          setIsTopPick(false);
+          setIsTrending(false);
+          setIsNewRelease(false);
+          setThumbnailFile(null);
+          setTrailerFile(null);
+          setYoutubeTrailerUrl('');
+          setUploadProgress(0);
+        } catch (error) {
+          console.error('Error saving video metadata:', error);
+        }
       }
-    });
+    );
   };
+  
+  
 
   const handleEpisodeSubmit = async (e) => {
     e.preventDefault();
@@ -137,16 +170,26 @@ const UploadContent = () => {
       alert("Please select a video file and episode number to upload.");
       return;
     }
-
+  
     const selectedMovie = movies.find(m => m.id === movieId);
-    const movieTitle = selectedMovie?.title?.replace(/\s+/g, '.').toLowerCase() || 'movie';
+  
+    // 1. Format movie title (e.g., "king the land" -> "king.the.land")
+    const movieTitleSlug = selectedMovie?.title?.replace(/\s+/g, '.').toLowerCase() || 'movie';
+  
+    // 2. Pad episode number and add "E" prefix
     const paddedEpisode = episodeNumber.toString().padStart(2, '0');
-    const customFileName = `${movieTitle}${paddedEpisode}-(PlayBox).mp4`;
+    const episodeCode = `E${paddedEpisode}`;
+  
+    // 3. Construct custom filename
+    const customFileName = `${movieTitleSlug}.${episodeCode}.(PlayBox).mp4`;
+  
+    // 4. Rename file
     const renamedFile = new File([file], customFileName, { type: file.type });
-
+  
+    // 5. Upload to Firebase Storage
     const videoRef = ref(storage, `videos/${customFileName}`);
     const uploadTask = uploadBytesResumable(videoRef, renamedFile);
-
+  
     uploadTask.on('state_changed', (snapshot) => {
       const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       setUploadProgress(progress);
@@ -154,16 +197,18 @@ const UploadContent = () => {
       console.error('Error uploading video:', error);
     }, async () => {
       const videoUrl = await getDownloadURL(videoRef);
-
+  
       try {
         const epCollRef = collection(db, `movies/${movieId}/episodes`);
         await addDoc(epCollRef, {
           episodeNumber: Number(episodeNumber),
           paddedEpisode,
           airDate,
-          videoUrl: videoUrl,
+          videoUrl,
+          fileName: customFileName,
           createdAt: serverTimestamp(),
         });
+  
         alert('Episode uploaded successfully!');
         setEpisodeNumber('');
         setAirDate('');
@@ -174,6 +219,7 @@ const UploadContent = () => {
       }
     });
   };
+  
 
   const handleMusicSubmit = async (e) => {
     e.preventDefault();
@@ -378,6 +424,15 @@ const UploadContent = () => {
                 required
               />
             </label>
+            <label>
+              Trailer URL:
+              <input
+                type="text"
+                value={youtubeTrailerUrl}
+                onChange={(e) => setYoutubeTrailerUrl(e.target.value)}
+                required
+              />
+            </label>
             <button type="submit">Upload Movie</button>
           </form>
         </>
@@ -407,7 +462,7 @@ const UploadContent = () => {
               Video URL:
               <input
                 type="file"
-                accept="video/*"
+                accept="video/*,.mkv"
                 onChange={handleFileChange}
                 required
               />

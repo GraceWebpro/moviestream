@@ -12,7 +12,11 @@ function EditContent({ movies, music }) {
   const [thumbnailFile, setThumbnailFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isMovie, setIsMovie] = useState(true); // Toggle between movie and music edit
+  const [newSlug, setNewSlug] = useState("");
+  const [newHeroPosterUrl, setNewHeroPosterUrl] = useState("");
+  const [newTrailerUrl, setNewTrailerUrl] = useState("");
 
+  
   useEffect(() => {
     if (selectedContent) {
       const content = isMovie
@@ -24,6 +28,10 @@ function EditContent({ movies, music }) {
         setNewCategory(content.category || "");
         setNewDescription(content.description || "");
         setNewTags(content.tags ? content.tags.join(", ") : "");
+        setNewHeroPosterUrl(content.heroPosterUrl || "");
+        setNewTrailerUrl(content.trailerUrl || "");
+        setNewSlug(content.slug || "");
+        setNewTags(content.tags ? content.tags.join(", ") : "");
       }
     }
   }, [selectedContent, movies, music, isMovie]);
@@ -34,27 +42,37 @@ function EditContent({ movies, music }) {
 
   const handleUpdate = async () => {
     if (!selectedContent) return alert("Please select content to edit.");
-
+  
     setLoading(true);
-
+  
     try {
       const contentRef = doc(
         db,
-        isMovie ? "movies" : "music", // Use movies or music collection based on toggle
+        isMovie ? "movies" : "music",
         selectedContent
       );
-
+  
+      const slug = newSlug
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9\s-]/g, "")
+        .replace(/\s+/g, "-")
+        .replace(/-+/g, "-");
+  
       let updatedData = {
         title: newTitle,
         description: newDescription,
         category: newCategory,
         tags: newTags.split(",").map((tag) => tag.trim()),
+        slug,
+        heroPosterUrl: newHeroPosterUrl,
       };
-
+  
+      // ✅ Optional thumbnail upload
       if (thumbnailFile) {
         const thumbnailRef = ref(storage, `thumbnails/${thumbnailFile.name}`);
         const uploadTask = uploadBytesResumable(thumbnailRef, thumbnailFile);
-
+  
         await new Promise((resolve, reject) => {
           uploadTask.on(
             "state_changed",
@@ -68,9 +86,14 @@ function EditContent({ movies, music }) {
           );
         });
       }
-
+  
+      // ✅ Add YouTube trailer URL if provided
+      if (newTrailerUrl) {
+        updatedData.trailerUrl = newTrailerUrl.trim();
+      }
+  
       await updateDoc(contentRef, updatedData);
-
+  
       alert(`${isMovie ? "Movie" : "Music"} updated successfully!`);
       setSelectedContent("");
       resetForm();
@@ -81,6 +104,8 @@ function EditContent({ movies, music }) {
       setLoading(false);
     }
   };
+  
+  
 
   const resetForm = () => {
     setNewTitle("");
@@ -88,6 +113,8 @@ function EditContent({ movies, music }) {
     setNewDescription("");
     setNewTags("");
     setThumbnailFile(null);
+    setNewSlug("");
+    setNewHeroPosterUrl("")
   };
 
   return (
@@ -113,11 +140,12 @@ function EditContent({ movies, music }) {
       {/* Dropdown to select content to edit */}
       <select onChange={(e) => setSelectedContent(e.target.value)} value={selectedContent}>
         <option value="">Select a {isMovie ? "movie" : "music"}</option>
-        {(isMovie ? movies : music).map((content) => (
+        {(isMovie ? movies || [] : music || []).map((content) => (
           <option key={content.id} value={content.id}>
             {content.title}
           </option>
         ))}
+
       </select>
 
       {/* Input fields for content details */}
@@ -131,6 +159,42 @@ function EditContent({ movies, music }) {
           className="input-field"
         />
       </div>
+
+      <div className="input-group">
+        <input
+          type="text"
+          placeholder="Slug (e.g., black-panther)"
+          value={newSlug}
+          onChange={(e) => setNewSlug(e.target.value)}
+          disabled={loading}
+          className="input-field"
+        />
+      </div>
+
+      <div className="input-group">
+        <input
+          type="text"
+          placeholder="Hero Poster URL"
+          value={newHeroPosterUrl}
+          onChange={(e) => setNewHeroPosterUrl(e.target.value)}
+          disabled={loading}
+          className="input-field"
+        />
+      </div>
+
+      <div className='input-group'>
+      <input 
+       type="text"
+       placeholder="YouTube Trailer URL"
+       value={newTrailerUrl}
+       onChange={(e) => setNewTrailerUrl(e.target.value)}       
+       disabled={loading}
+        className="input-field"
+        />
+
+
+      </div>
+
 
       <div className="input-group">
         <input

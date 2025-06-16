@@ -33,6 +33,25 @@ const Disclaimer = () => {
           By using our website, you hereby consent to our disclaimer and agree to its terms.
         </p>
 
+        <section>
+          <h3>Data Sources & Attribution</h3>
+          <p>
+            This product uses the TMDB API but is not endorsed or certified by TMDB.
+          </p>
+          <a
+            href="https://www.themoviedb.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://www.themoviedb.org/assets/2/v4/logos/stacked-blue-green-e3a5c375b8a2c1258bb6f6a0bfcdf408d86dd164870d0d42b982802c5b9d74db.svg"
+              alt="TMDB Logo"
+              width="100"
+            />
+          </a>
+        </section>
+
+
         <h2 style={styles.subheading}>Updates</h2>
         <p style={styles.paragraph}>
           We may update this disclaimer from time to time. Any changes will be posted on this page.

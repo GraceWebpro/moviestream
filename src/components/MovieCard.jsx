@@ -5,7 +5,7 @@ const MovieCard = ({ movie }) => {
   console.log('Movie ID:', movie.id); // Add this to debug
   
   return (
-    <Link to={`/movie/${movie.id}`} className="movie-card-link"> {/* Add Link here */}
+    <Link to={`/movies/${movie.slug}`} className="movie-card-link"> {/* Add Link here */}
       <div className="movie-card">
         <img src={movie.thumbnailUrl} alt={movie.title} />
         <h3>{movie.title}</h3>

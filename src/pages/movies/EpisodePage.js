@@ -60,7 +60,7 @@ const EpisodePage = () => {
               />
             </Helmet>
 
-<div style={{ padding: '2rem', maxWidth: '800px', margin: 'auto', textAlign: 'center' }}>
+<div style={{ padding: '2rem', maxWidth: '800px', margin: ' 80px auto', textAlign: 'center' }}>
 
       
       <h2 className='ep-page-title'>{title} - Episode {paddedEpisode}</h2>

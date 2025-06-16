@@ -40,7 +40,8 @@ const FeaturedMovies = ({ movie }) => {
       className="movie-card"
     >
       {/* ✅ Use slugified title here */}
-      <Link to={`/movies/${slugify(movie.title)}`}>        <img 
+      <Link to={`/movies/${movie.slug}`}>        
+      <img 
           src={movie.thumbnailUrl} 
           alt={movie.title} 
           className="movie-thumbnail"

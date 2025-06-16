@@ -35,14 +35,14 @@ const styles = {
   title: {
     fontSize: '6rem',
     marginBottom: '1rem',
-    color: '#1db954',
+    color: '#e50914',
   },
   message: {
     fontSize: '1.25rem',
     marginBottom: '2rem',
   },
   button: {
-    backgroundColor: '#1db954',
+    backgroundColor: '#e50914',
     color: '#fff',
     padding: '12px 24px',
     textDecoration: 'none',

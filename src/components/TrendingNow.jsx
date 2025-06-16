@@ -41,7 +41,7 @@ const TrendingNowCarousel = () => {
           <SwiperSlide key={movie.id}>
             
             <div className="movie-card">
-            <Link to={`/movie/${movie.id}`}>
+            <Link to={`/movies/${movie.slug}`}>
               <img
                 src={movie.thumbnailUrl}
                 alt={movie.title}

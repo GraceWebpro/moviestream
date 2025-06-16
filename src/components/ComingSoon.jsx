@@ -37,7 +37,7 @@ const ComingSoon = () => {
       >
         {newReleaseMovies.map((movie) => (
           <SwiperSlide key={movie.id}>
-            <Link to={`/movie/${mainFeatured.id}`}>
+            <Link to={`/movies/${mainFeatured.slug}`}>
             <div className="movie-card">
             
               <img
